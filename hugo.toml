@@ -9,7 +9,8 @@
 baseURL       = "https://www.grandazura.com/"
 languageCode  = "en-us"
 title         = "Grand Azura Hotel & Spa"
-paginate      = 9
+[pagination]
+  pagerSize = 9
 enableRobotsTXT = true
 enableGitInfo   = false
 copyright       = "© 2025 Grand Azura Hotel & Spa. All rights reserved."

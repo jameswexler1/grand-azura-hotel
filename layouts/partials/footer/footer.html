@@ -1,0 +1,149 @@
+{{- $p := .Site.Params -}}
+<footer class="site-footer" role="contentinfo">
+  <div class="container">
+
+    <!-- ── Main Footer Grid ── -->
+    <div class="footer-grid">
+
+      <!-- Brand Column -->
+      <div class="footer-brand reveal--left">
+        <div>
+          <div class="footer-logo-name">Grand <span>Azura</span></div>
+          <div class="footer-logo-sub">Hotel &amp; Spa</div>
+        </div>
+        <p class="footer-tagline">{{ $p.hotel_tagline }}</p>
+
+        <!-- Address -->
+        <address style="margin-top: var(--sp-6); font-style: normal;">
+          <p style="font-size: var(--fs-sm); font-weight: 300; color: var(--text-subdued); line-height: 1.8;">
+            {{ $p.address_street }}<br>
+            {{ $p.address_zip }} {{ $p.address_city }}, {{ $p.address_region }}<br>
+            {{ $p.address_country }}
+          </p>
+          <p style="margin-top: var(--sp-3); font-size: var(--fs-sm); color: var(--text-subdued);">
+            <a href="tel:{{ $p.phone_main }}" style="color: var(--gold-light); transition: color var(--t-fast);">{{ $p.phone_main }}</a><br>
+            <a href="mailto:{{ $p.email_general }}" style="color: var(--text-subdued); transition: color var(--t-fast);">{{ $p.email_general }}</a>
+          </p>
+        </address>
+
+        <!-- Social Links -->
+        <div class="footer-social">
+          {{- with $p.social_instagram }}
+          <a href="{{ . }}" class="footer-social-link" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Instagram">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+          {{- end }}
+          {{- with $p.social_facebook }}
+          <a href="{{ . }}" class="footer-social-link" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Facebook">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+            </svg>
+          </a>
+          {{- end }}
+          {{- with $p.social_twitter }}
+          <a href="{{ . }}" class="footer-social-link" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter / X">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </a>
+          {{- end }}
+          {{- with $p.social_linkedin }}
+          <a href="{{ . }}" class="footer-social-link" target="_blank" rel="noopener noreferrer" aria-label="Follow us on LinkedIn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/>
+            </svg>
+          </a>
+          {{- end }}
+          {{- with $p.social_youtube }}
+          <a href="{{ . }}" class="footer-social-link" target="_blank" rel="noopener noreferrer" aria-label="Watch us on YouTube">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
+              <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02"/>
+            </svg>
+          </a>
+          {{- end }}
+        </div>
+      </div>
+
+      <!-- Nav Columns -->
+      <div class="reveal" style="transition-delay: 80ms;">
+        <h3 class="footer-col-title">Discover</h3>
+        <ul class="footer-nav-list" role="list">
+          {{- range .Site.Menus.footer_col1 }}
+          <li><a href="{{ .URL }}" class="footer-nav-link">{{ .Name }}</a></li>
+          {{- end }}
+        </ul>
+      </div>
+
+      <div class="reveal" style="transition-delay: 160ms;">
+        <h3 class="footer-col-title">Information</h3>
+        <ul class="footer-nav-list" role="list">
+          {{- range .Site.Menus.footer_col2 }}
+          <li><a href="{{ .URL }}" class="footer-nav-link">{{ .Name }}</a></li>
+          {{- end }}
+        </ul>
+      </div>
+
+      <div class="reveal" style="transition-delay: 240ms;">
+        <h3 class="footer-col-title">Reservations</h3>
+        <ul class="footer-nav-list" role="list">
+          {{- range .Site.Menus.footer_col3 }}
+          <li>
+            <a
+              href="{{ .URL }}"
+              class="footer-nav-link"
+              {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer"{{ end }}
+            >{{ .Name }}</a>
+          </li>
+          {{- end }}
+        </ul>
+        <!-- Contact CTA -->
+        <div style="margin-top: var(--sp-8); padding-top: var(--sp-6); border-top: 1px solid var(--border);">
+          <p style="font-size: var(--fs-xs); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--sp-3);">Reservations Desk</p>
+          <a href="tel:{{ $p.phone_main }}" style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-lg); color: var(--gold-light); display: block; transition: color var(--t-fast);">{{ $p.phone_main }}</a>
+          <a href="mailto:{{ $p.email_bookings }}" style="font-size: var(--fs-sm); color: var(--text-subdued); margin-top: var(--sp-1); display: block; transition: color var(--t-fast);">{{ $p.email_bookings }}</a>
+        </div>
+      </div>
+
+    </div><!-- /.footer-grid -->
+
+    <!-- ── Newsletter Strip ── -->
+    <div class="reveal" style="padding-block: var(--sp-10); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: var(--sp-8); flex-wrap: wrap;">
+      <div>
+        <p style="font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: var(--sp-2);">Stay Connected</p>
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-xl); font-weight: 300; font-style: italic; color: var(--ivory);">Exclusive offers, curated experiences, and seasonal news.</p>
+      </div>
+      <form
+        action="#"
+        method="post"
+        style="display: flex; gap: 0; max-width: 420px; width: 100%;"
+        aria-label="Newsletter subscription"
+      >
+        <input
+          type="email"
+          name="email"
+          required
+          placeholder="Your email address"
+          aria-label="Email address for newsletter"
+          style="flex: 1; background: var(--card); border: 1px solid var(--border-light); border-right: none; color: var(--ivory); padding: var(--sp-4) var(--sp-5); font-size: var(--fs-sm); font-family: 'Jost', sans-serif; outline: none; transition: border-color var(--t-fast);"
+        >
+        <button type="submit" class="btn btn--primary btn--sm" style="white-space: nowrap; border-radius: 0;">Subscribe</button>
+      </form>
+    </div>
+
+    <!-- ── Footer Bottom ── -->
+    <div class="footer-bottom">
+      <p class="footer-copyright">{{ .Site.Copyright }}</p>
+      <nav aria-label="Legal navigation">
+        <div class="footer-legal">
+          <a href="/privacy/">Privacy Policy</a>
+          <a href="/cookies/">Cookie Policy</a>
+          <a href="/terms/">Terms &amp; Conditions</a>
+        </div>
+      </nav>
+    </div>
+
+  </div>
+</footer>

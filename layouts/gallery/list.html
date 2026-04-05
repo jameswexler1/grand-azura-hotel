@@ -1,0 +1,90 @@
+{{ define "main" }}
+{{- $p := .Site.Params -}}
+
+<section class="page-hero" aria-label="Gallery — Grand Azura Hotel">
+  <div class="page-hero__bg" style="background-image: url('/images/hero/hero-main.jpg');"></div>
+  <div class="page-hero__overlay"></div>
+  <div class="page-hero__content container">
+    <span class="eyebrow">Visual Journey</span>
+    <h1 class="page-hero__title">Gallery</h1>
+  </div>
+</section>
+
+<section class="section section--dark" aria-labelledby="gallery-heading">
+  <div class="container">
+    <header class="section-header section-header--center">
+      <span class="eyebrow reveal">{{ $p.hotel_full_name }}</span>
+      <h2 id="gallery-heading" class="reveal" style="transition-delay: 80ms;">A World Apart</h2>
+      <div class="gold-rule gold-rule--center reveal" style="transition-delay: 160ms;"></div>
+    </header>
+
+    <!-- Gallery Grid: Masonry-style using CSS grid -->
+    <div style="
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-3);
+      margin-top: var(--sp-12);
+    " class="stagger" aria-label="Photo gallery">
+
+      {{- $images := slice
+        (dict "src" "https://images.unsplash.com/photo-1561501900-3701fa6a0864?auto=format&fit=crop&w=1200&q=82"   "alt" "Grand Azura Suite — Penthouse terrace"    "span" "1 / span 1 / 1 / span 2")
+        (dict "src" "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=82"   "alt" "Azzurra Restaurant — Michelin-starred dining")
+        (dict "src" "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=82"       "alt" "Azura Spa — thermal infinity pool")
+        (dict "src" "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1200&q=82"    "alt" "Deluxe Sea View Room")
+        (dict "src" "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=82"      "alt" "La Terrazza — al fresco dining with sea view" "span" "2 / span 1 / 2 / span 2")
+        (dict "src" "https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=82"  "alt" "Junior Suite — soaking tub")
+        (dict "src" "https://images.unsplash.com/photo-1574096079513-d8259312b785?auto=format&fit=crop&w=1200&q=82"          "alt" "Il Tramonto Bar — signature cocktails")
+        (dict "src" "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=82"     "alt" "Azura Spa — treatment room detail")
+        (dict "src" "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=1200&q=82"  "alt" "Family Sea Suite")
+      -}}
+
+      {{- range $images }}
+      <figure
+        class="reveal"
+        style="
+          overflow: hidden;
+          background: var(--card);
+          background-image: linear-gradient(135deg, #0f1a2e 0%, #1a0f1a 100%);
+          margin: 0;
+          position: relative;
+          aspect-ratio: 4/3;
+          {{ with .span }}grid-area: {{ . }};{{ end }}
+        "
+      >
+        <img
+          src="{{ .src }}"
+          alt="{{ .alt }}"
+          style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1);"
+          loading="lazy"
+        >
+        <figcaption style="
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          padding: var(--sp-5) var(--sp-5) var(--sp-4);
+          background: linear-gradient(to top, rgba(5,7,13,0.85) 0%, transparent 100%);
+          font-size: var(--fs-xs);
+          letter-spacing: 0.1em;
+          color: rgba(240,232,208,0.7);
+          transform: translateY(4px);
+          opacity: 0;
+          transition: all 0.4s ease;
+        ">{{ .alt }}</figcaption>
+      </figure>
+      {{- end }}
+
+    </div>
+
+    <div style="text-align: center; margin-top: var(--sp-12);" class="reveal">
+      <p class="lead" style="max-width: 48ch; margin: 0 auto var(--sp-6);">Follow us on Instagram for daily inspiration from the Ligurian coast.</p>
+      <a href="{{ $p.social_instagram }}" class="btn btn--secondary btn--lg" target="_blank" rel="noopener noreferrer">
+        @grandazurahotel
+      </a>
+    </div>
+
+  </div>
+</section>
+
+{{- partial "sections/cta-booking.html" . -}}
+{{ end }}

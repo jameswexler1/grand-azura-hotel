@@ -1,0 +1,105 @@
+{{ define "main" }}
+{{- $p := .Site.Params -}}
+
+<section class="page-hero" aria-label="Spa and Wellness at {{ $p.hotel_full_name }}">
+  <div class="page-hero__bg" style="background-image: url('{{ .Site.Params.img_spa_hero }}');"></div>
+  <div class="page-hero__overlay"></div>
+  <div class="page-hero__content container">
+    <span class="eyebrow">Restoration · Renewal · Ritual</span>
+    <h1 class="page-hero__title">Azura Spa &amp; Wellness</h1>
+  </div>
+</section>
+
+<!-- Spa Intro -->
+<section class="section section--dark" aria-labelledby="spa-intro">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 7vw, 7rem); align-items: center;">
+
+      <div class="reveal--left">
+        <span class="eyebrow">2,400 m² · Sea Botanicals · Thermal Suite</span>
+        <h2 id="spa-intro" style="margin-top: var(--sp-5); margin-bottom: var(--sp-5);">A Sanctuary<br>Within a Sanctuary</h2>
+        <div class="gold-rule" style="margin-bottom: var(--sp-6);"></div>
+        <p class="lead" style="color: var(--cream);">The Azura Spa is an immersive world of thermal water, mineral-rich sea botanicals, and ancient Ligurian healing traditions — re-imagined through the lens of contemporary luxury wellness.</p>
+        <p style="margin-top: var(--sp-5); font-size: var(--fs-sm); font-weight: 300; color: var(--text-subdued); line-height: 1.9;">
+          Our 2,400 square metre spa occupies the entire lower level of the hotel, with direct sea views from the thermal suites and outdoor treatment terraces. Water sourced from the Ligurian coast is the heart of every ritual here.
+        </p>
+        <div style="margin-top: var(--sp-8); display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-3);">
+          {{- $features := slice "Hammam" "Finnish Sauna" "Turkish Baths" "Thermal Pool" "Ice Fountain" "Outdoor Terrace" "6 Treatment Rooms" "Couples Suite" -}}
+          {{- range $features }}
+          <div style="display: flex; align-items: center; gap: var(--sp-3); font-size: var(--fs-sm); color: var(--text-subdued);">
+            <span style="width: 16px; height: 1px; background: var(--gold); flex-shrink: 0;"></span>
+            {{ . }}
+          </div>
+          {{- end }}
+        </div>
+        <div class="btn-group" style="margin-top: var(--sp-8);">
+          <a href="/contact/" class="btn btn--primary">Book a Treatment</a>
+          <a href="tel:{{ $p.phone_spa }}" class="btn btn--secondary">{{ $p.phone_spa }}</a>
+        </div>
+      </div>
+
+      <div class="reveal--right" style="display: grid; grid-template-rows: 1fr 1fr; gap: var(--sp-3); height: 600px;">
+        <div style="overflow: hidden; background: var(--card); background-image: linear-gradient(135deg, #0a1525 0%, #0d1020 100%);">
+          <img src="{{ .Site.Params.img_spa_main }}" alt="The thermal pool at Azura Spa" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+        </div>
+        <div style="overflow: hidden; background: var(--card); background-image: linear-gradient(135deg, #1a0810 0%, #0f1a1a 100%);">
+          <img src="{{ .Site.Params.img_spa_detail }}" alt="Treatment room at Azura Spa" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Spa Services -->
+<section class="section section--void" aria-labelledby="spa-services-heading">
+  <div class="container">
+    <header class="section-header section-header--center">
+      <span class="eyebrow reveal">Treatment Menu</span>
+      <h2 id="spa-services-heading" class="reveal" style="transition-delay: 80ms;">Our Rituals</h2>
+      <div class="gold-rule gold-rule--center reveal" style="transition-delay: 160ms;"></div>
+      <p class="lead reveal" style="transition-delay: 200ms; max-width: 54ch;">Each treatment has been developed in partnership with Ligurian herbalists and international wellness masters. All products used are organic and locally sourced.</p>
+    </header>
+
+    {{- /* Group by category */ -}}
+    {{- $spa_categories := slice -}}
+    {{- range $p.spa_services -}}
+      {{- if not (in $spa_categories .category) -}}
+        {{- $spa_categories = $spa_categories | append .category -}}
+      {{- end -}}
+    {{- end -}}
+
+    {{- range $spa_categories }}
+    {{- $cat_services := where $p.spa_services "category" . }}
+    <div style="margin-bottom: var(--sp-12);">
+      <h3 style="font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: var(--sp-6); padding-bottom: var(--sp-4); border-bottom: 1px solid var(--border);">{{ . }}</h3>
+      <div class="spa-services-grid stagger">
+        {{- range $cat_services }}
+        <div class="spa-card reveal">
+          <div class="spa-card__name">{{ .name }}</div>
+          <p class="spa-card__desc">{{ .description }}</p>
+          <div class="spa-card__footer">
+            <span class="spa-card__duration">{{ .duration }}</span>
+            <span class="spa-card__price">{{ .price }}</span>
+          </div>
+          <a href="/contact/" class="arrow-link" style="margin-top: var(--sp-2);">Book Treatment</a>
+        </div>
+        {{- end }}
+      </div>
+    </div>
+    {{- end }}
+
+    <!-- Spa note -->
+    <div class="reveal" style="padding: var(--sp-8); background: var(--card); border: 1px solid rgba(184,144,74,0.15); text-align: center; margin-top: var(--sp-8);">
+      <p style="font-size: var(--fs-sm); font-weight: 300; color: var(--text-subdued); line-height: 1.8;">
+        Spa open {{ $p.spa_hours }} daily · Advance booking recommended · Hotel guests receive priority booking<br>
+        Spa enquiries: <a href="tel:{{ $p.phone_spa }}" style="color: var(--gold-light);">{{ $p.phone_spa }}</a> ·
+        <a href="mailto:{{ $p.email_spa }}" style="color: var(--gold-light);">{{ $p.email_spa }}</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+{{- partial "sections/cta-booking.html" . -}}
+
+{{ end }}

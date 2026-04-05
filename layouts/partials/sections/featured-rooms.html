@@ -1,0 +1,69 @@
+{{- $p := .Site.Params -}}
+{{- $featured := where $p.rooms "featured" true -}}
+<section class="section section--dark" aria-labelledby="rooms-heading">
+  <div class="container">
+
+    <header class="section-header section-header--center">
+      <span class="eyebrow reveal">Rooms &amp; Suites</span>
+      <h2 id="rooms-heading" class="reveal" style="transition-delay: 80ms;">Curated Sanctuaries</h2>
+      <div class="gold-rule gold-rule--center reveal" style="transition-delay: 160ms;"></div>
+      <p class="lead reveal" style="transition-delay: 200ms; max-width: 56ch;">
+        Each of our {{ len $p.rooms }} rooms and suites is an individual composition —
+        hand-furnished by Milanese artisans, oriented toward the sea.
+      </p>
+    </header>
+
+    <div class="rooms-grid stagger">
+      {{- range $featured }}
+      <article class="room-card reveal" aria-labelledby="room-{{ .id }}">
+
+        <div class="room-card__img-wrap">
+          <img
+            src="{{ .image }}"
+            alt="{{ .name }} at Grand Azura Hotel — {{ .view }}"
+            class="room-card__img"
+            loading="lazy"
+            width="800"
+            height="600"
+          >
+          <span class="room-card__category">{{ .category }}</span>
+        </div>
+
+        <div class="room-card__body">
+          <div class="room-card__specs">
+            <div class="room-card__spec">
+              <span class="room-card__spec-label">Size</span>
+              <span class="room-card__spec-value">{{ .size_sqm }} m²</span>
+            </div>
+            <div class="room-card__spec">
+              <span class="room-card__spec-label">Guests</span>
+              <span class="room-card__spec-value">Up to {{ .max_guests }}</span>
+            </div>
+            <div class="room-card__spec">
+              <span class="room-card__spec-label">Bed</span>
+              <span class="room-card__spec-value">{{ .bed_type }}</span>
+            </div>
+          </div>
+
+          <h3 class="room-card__name" id="room-{{ .id }}">{{ .name }}</h3>
+          <p class="room-card__desc">{{ .description }}</p>
+
+          <div class="room-card__footer">
+            <div class="room-card__price">
+              <span class="room-card__price-label">Starting from</span>
+              <span class="room-card__price-amount">{{ .price_label }}</span>
+            </div>
+            <a href="/rooms/#{{ .id }}" class="arrow-link">Details</a>
+          </div>
+        </div>
+
+      </article>
+      {{- end }}
+    </div>
+
+    <div style="text-align: center; margin-top: var(--sp-12);" class="reveal">
+      <a href="/rooms/" class="btn btn--secondary btn--lg">View All Rooms &amp; Suites</a>
+    </div>
+
+  </div>
+</section>

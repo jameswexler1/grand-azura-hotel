@@ -1,0 +1,37 @@
+{{- $p := .Site.Params -}}
+<section class="section" style="background: var(--deep);" aria-labelledby="testimonials-heading">
+  <div class="container">
+
+    <header class="section-header section-header--center">
+      <span class="eyebrow reveal">Guest Stories</span>
+      <h2 id="testimonials-heading" class="reveal" style="transition-delay: 80ms;">Words From Our Guests</h2>
+      <div class="gold-rule gold-rule--center reveal" style="transition-delay: 160ms;"></div>
+    </header>
+
+    <div class="testimonials-grid stagger">
+      {{- range first 3 $p.testimonials }}
+      <blockquote class="testimonial-card reveal" aria-label="Review by {{ .name }}">
+        <div class="testimonial-stars" aria-label="{{ .rating }} out of 5 stars">
+          {{- range seq .rating }}★{{ end }}
+        </div>
+        <p class="testimonial-text">"{{ .text }}"</p>
+        <footer class="testimonial-meta">
+          <cite class="testimonial-name">{{ .name }}</cite>
+          <span class="testimonial-origin">{{ .origin }}</span>
+          <span class="testimonial-stay">{{ .stay }} · {{ .date }}</span>
+        </footer>
+      </blockquote>
+      {{- end }}
+    </div>
+
+    <!-- TripAdvisor badge area -->
+    <div class="reveal" style="text-align: center; margin-top: var(--sp-12); display: flex; flex-direction: column; align-items: center; gap: var(--sp-4);">
+      <div style="display: flex; align-items: center; gap: var(--sp-3);">
+        <span style="color: var(--gold); font-size: 1.2rem;">★★★★★</span>
+        <span style="font-size: var(--fs-sm); color: var(--text-subdued);">5.0 · Rated Exceptional on TripAdvisor</span>
+      </div>
+      <a href="{{ $p.social_tripadvisor }}" class="btn btn--secondary btn--sm" target="_blank" rel="noopener noreferrer">Read All Reviews</a>
+    </div>
+
+  </div>
+</section>

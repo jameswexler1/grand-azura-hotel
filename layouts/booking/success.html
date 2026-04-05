@@ -1,0 +1,108 @@
+{{ define "main" }}
+{{- $p := .Site.Params -}}
+{{ $css := resources.Get "css/booking.css" | minify | fingerprint "sha512" -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+
+<section class="booking-success">
+  <div class="booking-success__bg" aria-hidden="true"></div>
+  <div class="booking-success__card">
+
+    <div class="booking-success__icon" aria-hidden="true">✓</div>
+
+    <span class="eyebrow">Booking Confirmed</span>
+    <h1 style="font-size: var(--fs-2xl); font-weight: 300; font-style: italic; color: var(--ivory);">
+      Your Stay is Reserved
+    </h1>
+    <div class="gold-rule gold-rule--center"></div>
+    <p style="font-size: var(--fs-sm); font-weight: 300; color: var(--text-subdued); line-height: 1.8; max-width: 42ch;">
+      Thank you for choosing Grand Azura Hotel &amp; Spa. A confirmation with your booking details
+      has been sent to your email address.
+    </p>
+
+    <!-- Booking reference (populated by JS from URL params) -->
+    <div>
+      <p style="font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--sp-3);">Booking Reference</p>
+      <div class="booking-success__ref" id="booking-ref">Loading…</div>
+    </div>
+
+    <!-- Details grid (populated by JS from URL params) -->
+    <div class="booking-detail-grid" id="booking-details">
+      <div class="booking-detail-item">
+        <div class="booking-detail-label">Room</div>
+        <div class="booking-detail-value" id="detail-room">—</div>
+      </div>
+      <div class="booking-detail-item">
+        <div class="booking-detail-label">Check-in</div>
+        <div class="booking-detail-value" id="detail-checkin">—</div>
+      </div>
+      <div class="booking-detail-item">
+        <div class="booking-detail-label">Check-out</div>
+        <div class="booking-detail-value" id="detail-checkout">—</div>
+      </div>
+      <div class="booking-detail-item">
+        <div class="booking-detail-label">Total Paid</div>
+        <div class="booking-detail-value" id="detail-total">—</div>
+      </div>
+    </div>
+
+    <div style="padding: var(--sp-5) var(--sp-6); background: var(--dark); border: 1px solid var(--border); width: 100%; text-align: left;">
+      <p style="font-size: var(--fs-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: var(--sp-2);">What Happens Next</p>
+      <p style="font-size: var(--fs-sm); font-weight: 300; color: var(--text-subdued); line-height: 1.8;">
+        Our concierge team will contact you within 24 hours to confirm your preferences and arrange
+        any special requests. Check-in is from {{ $p.checkin_time }} — early arrival can be
+        arranged on request.
+      </p>
+    </div>
+
+    <div style="display: flex; gap: var(--sp-4); flex-wrap: wrap; justify-content: center;">
+      <a href="/" class="btn btn--primary">Return to Hotel</a>
+      <a href="/contact/" class="btn btn--secondary">Contact Concierge</a>
+    </div>
+
+    <p style="font-size: var(--fs-xs); color: var(--text-muted);">
+      Questions? Call us: <a href="tel:{{ $p.phone_main }}" style="color: var(--gold-light);">{{ $p.phone_main }}</a>
+    </p>
+
+  </div>
+</section>
+
+<script>
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const intentId = params.get('payment_intent') || '';
+
+    // Booking reference: last 12 chars of payment intent, uppercased
+    const ref = intentId
+      ? 'GA-' + intentId.replace('pi_', '').slice(-10).toUpperCase()
+      : 'GA-' + Math.random().toString(36).slice(2, 12).toUpperCase();
+
+    const refEl = document.getElementById('booking-ref');
+    if (refEl) refEl.textContent = ref;
+
+    // Restore details from sessionStorage (set before payment redirect)
+    try {
+      const stored = JSON.parse(sessionStorage.getItem('ga_booking') || '{}');
+      const formatDate = (d) => {
+        if (!d) return '—';
+        const dt = new Date(d + 'T12:00:00');
+        return dt.toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      };
+
+      const roomEl = document.getElementById('detail-room');
+      const cinEl  = document.getElementById('detail-checkin');
+      const coutEl = document.getElementById('detail-checkout');
+      const totEl  = document.getElementById('detail-total');
+
+      if (roomEl)  roomEl.textContent  = stored.roomName  || '—';
+      if (cinEl)   cinEl.textContent   = formatDate(stored.checkin);
+      if (coutEl)  coutEl.textContent  = formatDate(stored.checkout);
+      if (totEl)   totEl.textContent   = stored.total ? `€${stored.total}` : '—';
+
+      // Clean up
+      sessionStorage.removeItem('ga_booking');
+    } catch (e) {
+      console.warn('Could not restore booking details:', e);
+    }
+  })();
+</script>
+{{ end }}

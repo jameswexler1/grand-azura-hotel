@@ -1,0 +1,190 @@
+{{ define "main" }}
+{{- $p := .Site.Params -}}
+
+<!-- ══ PAGE HERO ══════════════════════════════════════════════════════════ -->
+<section class="page-hero" aria-label="Rooms and Suites at {{ $p.hotel_full_name }}">
+  <div class="page-hero__bg" style="background-image: url('{{ .Site.Params.img_rooms_hero }}');"></div>
+  <div class="page-hero__overlay"></div>
+  <div class="page-hero__content container">
+    <span class="eyebrow">{{ len $p.rooms }} Rooms &amp; Suites · {{ $p.address_city }}</span>
+    <h1 class="page-hero__title">Your Private Sanctuary</h1>
+  </div>
+</section>
+
+<!-- ══ INTRO ═════════════════════════════════════════════════════════════ -->
+<section class="section section--dark" aria-labelledby="rooms-intro-heading">
+  <div class="container container--narrow" style="text-align: center;">
+    <div style="display: flex; flex-direction: column; align-items: center; gap: var(--sp-6);">
+      <span class="eyebrow reveal">Handcrafted Interiors · Panoramic Views</span>
+      <h2 id="rooms-intro-heading" class="reveal" style="transition-delay: 80ms;">Every Room, A Masterpiece</h2>
+      <div class="gold-rule gold-rule--center reveal" style="transition-delay: 160ms;"></div>
+      <p class="lead reveal" style="transition-delay: 200ms; text-align: center;">
+        Each of our rooms and suites has been individually conceived by a different Milanese interior
+        architect — a curated collection of spaces, not a repetition. From intimate sea-view doubles
+        to the full-floor penthouse suite, every stay is singular.
+      </p>
+    </div>
+
+    <!-- Policies -->
+    <div class="reveal" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); margin-top: var(--sp-12);">
+      <div style="padding: var(--sp-6); background: var(--card); border: 1px solid var(--border); text-align: center;">
+        <p style="font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: var(--sp-2);">Check-in</p>
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-xl); color: var(--ivory);">From {{ $p.checkin_time }}</p>
+      </div>
+      <div style="padding: var(--sp-6); background: var(--card); border: 1px solid var(--border); text-align: center;">
+        <p style="font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: var(--sp-2);">Check-out</p>
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-xl); color: var(--ivory);">Until {{ $p.checkout_time }}</p>
+      </div>
+      <div style="padding: var(--sp-6); background: var(--card); border: 1px solid var(--border); text-align: center;">
+        <p style="font-size: var(--fs-xs); letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: var(--sp-2);">Room Service</p>
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-xl); color: var(--ivory);">{{ $p.room_service_hours }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FILTER BAR ════════════════════════════════════════════════════════ -->
+{{- $categories := slice -}}
+{{- range $p.rooms -}}
+  {{- if not (in $categories .category) -}}
+    {{- $categories = $categories | append .category -}}
+  {{- end -}}
+{{- end -}}
+
+<div style="background: var(--card); border-bottom: 1px solid var(--border); padding: var(--sp-5) 0; position: sticky; top: var(--nav-h); z-index: 50; backdrop-filter: blur(16px);" role="navigation" aria-label="Filter rooms by category">
+  <div class="container" style="display: flex; align-items: center; gap: var(--sp-4); flex-wrap: wrap;">
+    <span style="font-size: var(--fs-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted);">Filter:</span>
+    <div class="rooms-filter" id="rooms-filter">
+      <button class="filter-btn is-active" data-filter="all">All ({{ len $p.rooms }})</button>
+      {{- range $categories }}
+      <button class="filter-btn" data-filter="{{ . | urlize }}">{{ . }}</button>
+      {{- end }}
+    </div>
+  </div>
+</div>
+
+<!-- ══ ROOMS LISTING ═══════════════════════════════════════════════════════ -->
+<section class="section section--void" aria-live="polite" aria-label="Room listings">
+  <div class="container">
+    <div id="rooms-listing">
+      {{- range $p.rooms }}
+      <article
+        class="room-full-card reveal"
+        id="{{ .id }}"
+        data-category="{{ .category | urlize }}"
+        aria-labelledby="room-name-{{ .id }}"
+        style="margin-bottom: var(--sp-6);"
+      >
+
+        <!-- Image -->
+        <div class="room-full-card__img-wrap" style="min-height: 360px;">
+          <img
+            src="{{ .image }}"
+            alt="{{ .name }} — {{ .view }} — Grand Azura Hotel"
+            class="room-full-card__img"
+            loading="lazy"
+            width="800"
+            height="600"
+          >
+          <!-- Category badge -->
+          <span style="position: absolute; bottom: var(--sp-4); left: var(--sp-4); padding: var(--sp-1) var(--sp-3); background: rgba(5,7,13,0.85); border: 1px solid rgba(184,144,74,0.3); font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); backdrop-filter: blur(6px);">{{ .category }}</span>
+        </div>
+
+        <!-- Body -->
+        <div class="room-full-card__body">
+          <div>
+            <span class="eyebrow eyebrow--no-lines" style="margin-bottom: var(--sp-3);">{{ .view }} · Floor {{ .floor }}</span>
+            <h2 class="room-card__name" id="room-name-{{ .id }}" style="font-size: var(--fs-2xl); margin-bottom: var(--sp-4);">{{ .name }}</h2>
+            <div class="gold-rule" style="margin-bottom: var(--sp-5);"></div>
+            <p style="font-size: var(--fs-sm); font-weight: 300; color: var(--text-subdued); line-height: 1.8; margin-bottom: var(--sp-6);">{{ .description }}</p>
+          </div>
+
+          <!-- Specs grid -->
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-3); margin-bottom: var(--sp-6);">
+            <div style="padding: var(--sp-3) var(--sp-4); background: var(--dark); border: 1px solid var(--border);">
+              <span style="display: block; font-size: calc(var(--fs-xs) * 0.82); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted);">Room Size</span>
+              <span style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-lg); color: var(--ivory);">{{ .size_sqm }} m²</span>
+            </div>
+            <div style="padding: var(--sp-3) var(--sp-4); background: var(--dark); border: 1px solid var(--border);">
+              <span style="display: block; font-size: calc(var(--fs-xs) * 0.82); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted);">Max Guests</span>
+              <span style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-lg); color: var(--ivory);">{{ .max_guests }} guests</span>
+            </div>
+            <div style="padding: var(--sp-3) var(--sp-4); background: var(--dark); border: 1px solid var(--border);">
+              <span style="display: block; font-size: calc(var(--fs-xs) * 0.82); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted);">Bed Type</span>
+              <span style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-lg); color: var(--ivory);">{{ .bed_type }}</span>
+            </div>
+            <div style="padding: var(--sp-3) var(--sp-4); background: var(--dark); border: 1px solid var(--border);">
+              <span style="display: block; font-size: calc(var(--fs-xs) * 0.82); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted);">Floor</span>
+              <span style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-lg); color: var(--ivory);">{{ .floor }}</span>
+            </div>
+          </div>
+
+          <!-- Amenities -->
+          {{ with .amenities }}
+          <div class="room-amenities">
+            <h3 style="font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: var(--sp-3);">Included Amenities</h3>
+            {{ range . }}
+              {{ range .list }}
+              <div class="room-amenity">{{ . }}</div>
+              {{ end }}
+            {{ end }}
+          </div>
+          {{ end }}
+
+          <!-- Price & CTA -->
+          <div style="margin-top: auto; padding-top: var(--sp-6); border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); flex-wrap: wrap;">
+            <div>
+              <p style="font-size: var(--fs-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);">Starting from</p>
+              <p style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-2xl); color: var(--gold);">€{{ .price_eur }}<span style="font-size: var(--fs-base); color: var(--text-muted);"> / night</span></p>
+            </div>
+            <a
+              href="/booking/"
+              class="btn btn--primary"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Book {{ .name }}"
+            >Book This Room</a>
+          </div>
+
+        </div>
+      </article>
+      {{- end }}
+
+      <!-- No results message (shown by JS when filter has no matches) -->
+      <div id="rooms-no-results" class="hidden" style="text-align: center; padding: var(--sp-20) var(--sp-8); display: flex; flex-direction: column; align-items: center; gap: var(--sp-5);">
+        <p style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-2xl); font-style: italic; color: var(--text-subdued);">No rooms match this filter.</p>
+        <button class="btn btn--secondary" data-filter="all" id="clear-filter">View All Rooms</button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ INCLUSIONS BANNER ══════════════════════════════════════════════════ -->
+<section class="section section--dark" aria-labelledby="inclusions-heading">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: var(--sp-12);">
+      <span class="eyebrow reveal">With Every Stay</span>
+      <h2 id="inclusions-heading" class="reveal" style="transition-delay: 80ms; margin-top: var(--sp-4);">Complimentary Privileges</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-4);" class="stagger">
+      {{- $inclusions := slice
+        (dict "icon" "☕" "title" "Daily Breakfast" "desc" "Served in Azzurra or La Terrazza, 07:00–10:30")
+        (dict "icon" "🏊" "title" "Pool Access" "desc" "Heated saltwater infinity pool, 08:00–20:00")
+        (dict "icon" "🍷" "title" "Welcome Champagne" "desc" "Franciacorta DOCG on arrival, every night")
+        (dict "icon" "🚗" "title" "Valet Parking" "desc" "Complimentary, including EV charging")
+      -}}
+      {{- range $inclusions }}
+      <div class="reveal" style="padding: var(--sp-7) var(--sp-6); background: var(--card); border: 1px solid var(--border); text-align: center; display: flex; flex-direction: column; gap: var(--sp-4); align-items: center;">
+        <span style="font-size: 2.5rem;" aria-hidden="true">{{ .icon }}</span>
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-lg); color: var(--ivory);">{{ .title }}</h3>
+        <p style="font-size: var(--fs-sm); color: var(--text-subdued); font-weight: 300; line-height: 1.6;">{{ .desc }}</p>
+      </div>
+      {{- end }}
+    </div>
+  </div>
+</section>
+
+{{- partial "sections/cta-booking.html" . -}}
+
+{{ end }}

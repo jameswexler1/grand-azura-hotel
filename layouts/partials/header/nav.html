@@ -1,0 +1,92 @@
+{{- $p := .Site.Params -}}
+<header class="site-header" id="site-header" role="banner">
+  <div class="nav-inner">
+
+    <!-- ── Logo ── -->
+    <a href="/" class="site-logo" aria-label="{{ $p.hotel_full_name }} — Home">
+      <span class="site-logo__name">Grand <span>Azura</span></span>
+      <span class="site-logo__sub">Hotel &amp; Spa · Est. {{ $p.hotel_since }}</span>
+    </a>
+
+    <!-- ── Desktop Navigation ── -->
+    <nav role="navigation" aria-label="Main navigation">
+      <ul class="nav-list" role="list">
+        {{- range .Site.Menus.main }}
+        <li>
+          <a
+            href="{{ .URL }}"
+            class="nav-link{{ if eq $.RelPermalink .URL }} active{{ end }}"
+            {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer"{{ end }}
+          >{{ .Name }}</a>
+        </li>
+        {{- end }}
+      </ul>
+    </nav>
+
+    <!-- ── Desktop Book Button ── -->
+    <a
+      href="/booking/"
+      class="btn btn--primary btn--sm nav-book-btn"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Make a reservation at {{ $p.hotel_full_name }}"
+    >Reserve</a>
+
+    <!-- ── Mobile Hamburger ── -->
+    <button
+      class="nav-toggle"
+      id="nav-toggle"
+      aria-label="Open navigation menu"
+      aria-expanded="false"
+      aria-controls="nav-drawer"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+</header>
+
+<!-- ── Mobile Drawer ── -->
+<div
+  class="nav-drawer"
+  id="nav-drawer"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Navigation menu"
+>
+  <nav aria-label="Mobile navigation">
+    <ul class="nav-drawer__list" role="list">
+      {{- range .Site.Menus.main }}
+      <li>
+        <a
+          href="{{ .URL }}"
+          class="nav-drawer__link"
+          {{ if strings.HasPrefix .URL "http" }}target="_blank" rel="noopener noreferrer"{{ end }}
+        >{{ .Name }}</a>
+      </li>
+      {{- end }}
+    </ul>
+  </nav>
+
+  <a
+    href="/booking/"
+    class="btn btn--primary"
+    target="_blank"
+    rel="noopener noreferrer"
+    style="margin-top: var(--sp-6);"
+  >Make a Reservation</a>
+
+  <div class="nav-drawer__footer">
+    {{- with $p.social_instagram }}
+    <a href="{{ . }}" class="nav-drawer__social" target="_blank" rel="noopener noreferrer" aria-label="Instagram">Instagram</a>
+    {{- end }}
+    {{- with $p.social_facebook }}
+    <a href="{{ . }}" class="nav-drawer__social" target="_blank" rel="noopener noreferrer" aria-label="Facebook">Facebook</a>
+    {{- end }}
+    {{- with $p.social_tripadvisor }}
+    <a href="{{ . }}" class="nav-drawer__social" target="_blank" rel="noopener noreferrer" aria-label="TripAdvisor">TripAdvisor</a>
+    {{- end }}
+  </div>
+</div>

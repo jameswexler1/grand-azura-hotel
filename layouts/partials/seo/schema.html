@@ -1,0 +1,108 @@
+{{- $p := .Site.Params -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Hotel",
+  "@id": "{{ .Site.BaseURL }}#hotel",
+  "name": "{{ $p.hotel_full_name }}",
+  "description": "{{ $p.hotel_description }}",
+  "url": "{{ .Site.BaseURL }}",
+  "logo": {
+    "@type": "ImageObject",
+    "url": "{{ "/favicon/favicon.svg" | absURL }}",
+    "width": 512,
+    "height": 512
+  },
+  "image": [
+    "{{ $p.og_image | absURL }}",
+    "{{ "/images/hero/hero-main.jpg" | absURL }}"
+  ],
+  "telephone": "{{ $p.phone_main }}",
+  "email": "{{ $p.email_general }}",
+  "faxNumber": "{{ $p.fax }}",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "{{ $p.address_street }}",
+    "addressLocality": "{{ $p.address_city }}",
+    "addressRegion": "{{ $p.address_region }}",
+    "postalCode": "{{ $p.address_zip }}",
+    "addressCountry": "IT"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": {{ $p.map_lat }},
+    "longitude": {{ $p.map_lng }}
+  },
+  "hasMap": "{{ $p.map_link }}",
+  "starRating": {
+    "@type": "Rating",
+    "ratingValue": "{{ $p.hotel_stars }}",
+    "bestRating": "5"
+  },
+  "priceRange": "€€€€€",
+  "checkinTime": "{{ $p.checkin_time }}",
+  "checkoutTime": "{{ $p.checkout_time }}",
+  "amenityFeature": [
+    {{ range $i, $f := $p.facilities }}{{ if $i }},{{ end }}
+    { "@type": "LocationFeatureSpecification", "name": "{{ $f.name }}", "value": true }
+    {{ end }}
+  ],
+  "numberOfRooms": {{ len $p.rooms }},
+  "containsPlace": [
+    {{ range $i, $r := $p.rooms }}{{ if $i }},{{ end }}
+    {
+      "@type": "HotelRoom",
+      "name": "{{ $r.name }}",
+      "description": "{{ $r.description }}",
+      "occupancy": { "@type": "QuantitativeValue", "maxValue": {{ $r.max_guests }} },
+      "floorSize": { "@type": "QuantitativeValue", "value": {{ $r.size_sqm }}, "unitCode": "MTK" }
+    }
+    {{ end }}
+  ],
+  "hasRestaurant": {
+    "@type": "Restaurant",
+    "name": "{{ $p.dining.restaurant_name }}",
+    "description": "{{ $p.dining.restaurant_desc }}",
+    "servesCuisine": "Italian, Mediterranean",
+    "priceRange": "€€€€€",
+    "openingHours": ["Mo-Su {{ $p.dinner_hours }}", "Mo-Su {{ $p.lunch_hours }}"]
+  },
+  "sameAs": [
+    "{{ $p.social_instagram }}",
+    "{{ $p.social_facebook }}",
+    "{{ $p.social_linkedin }}",
+    "{{ $p.social_tripadvisor }}"
+  ],
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "00:00",
+    "closes": "23:59",
+    "description": "Reception open 24/7"
+  }
+}
+</script>
+
+{{- /* BreadcrumbList for inner pages */ -}}
+{{ if not .IsHome }}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "{{ $p.hotel_name }}",
+      "item": "{{ .Site.BaseURL }}"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "{{ .Title }}",
+      "item": "{{ .Permalink }}"
+    }
+  ]
+}
+</script>
+{{ end }}

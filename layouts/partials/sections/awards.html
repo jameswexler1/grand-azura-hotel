@@ -1,0 +1,25 @@
+{{- $p := .Site.Params -}}
+{{ if $p.awards }}
+<section class="awards-strip" aria-label="Awards and Recognitions">
+  <div class="container">
+    <div class="awards-strip__inner">
+      {{- range $p.awards }}
+      <div class="award-item">
+        <div class="award-item__icon" aria-hidden="true">
+          {{- if eq .icon "star" }}⭐
+          {{- else if eq .icon "trophy" }}🏆
+          {{- else if eq .icon "leaf" }}🌿
+          {{- else if eq .icon "chef" }}👨‍🍳
+          {{- else }}🏅
+          {{- end }}
+        </div>
+        <div class="award-item__info">
+          <div class="award-item__name">{{ .name }}</div>
+          <div class="award-item__year">{{ .year }}</div>
+        </div>
+      </div>
+      {{- end }}
+    </div>
+  </div>
+</section>
+{{ end }}

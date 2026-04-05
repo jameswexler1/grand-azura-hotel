@@ -1,0 +1,44 @@
+{{- $p := .Site.Params -}}
+<section class="section section--dark" aria-labelledby="facilities-heading">
+  <div class="container">
+
+    <header class="section-header section-header--center">
+      <span class="eyebrow reveal">The Hotel</span>
+      <h2 id="facilities-heading" class="reveal" style="transition-delay: 80ms;">Every Amenity, Perfected</h2>
+      <div class="gold-rule gold-rule--center reveal" style="transition-delay: 160ms;"></div>
+    </header>
+
+    <div class="facilities-grid stagger">
+      {{- range $p.facilities }}
+      <div class="facility-item reveal">
+        <div class="facility-item__icon" aria-hidden="true">
+          {{- if eq .icon "pool" }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 18c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><circle cx="12" cy="5" r="2"/><path d="M12 7v5"/></svg>
+          {{- else if eq .icon "spa" }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10"/><path d="M12 6v6l4 2"/><path d="M20 2s0 4-4 6 4 6 4 6"/></svg>
+          {{- else if eq .icon "dumbbell" }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5h11M6.5 17.5h11M4 9h2v6H4zM18 9h2v6h-2zM2 11h2v2H2zM20 11h2v2h-2z"/></svg>
+          {{- else if eq .icon "wine" }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 22h8M7 11h10M12 11v11M5 3h14l-3 8H8L5 3z"/></svg>
+          {{- else if eq .icon "anchor" }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="3"/><line x1="12" y1="22" x2="12" y2="8"/><path d="M5 12H2a10 10 0 0 0 20 0h-3"/></svg>
+          {{- else if eq .icon "car" }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h5l3 3v5h-8V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          {{- else if eq .icon "wifi" }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+          {{- else if eq .icon "briefcase" }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          {{- else }}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+          {{- end }}
+        </div>
+        <div>
+          <h3 class="facility-item__name">{{ .name }}</h3>
+          <p class="facility-item__desc">{{ .desc }}</p>
+        </div>
+      </div>
+      {{- end }}
+    </div>
+
+  </div>
+</section>

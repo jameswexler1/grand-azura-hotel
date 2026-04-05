@@ -1,0 +1,222 @@
+{{ define "main" }}
+{{- $p := .Site.Params -}}
+
+<!-- ══ PAGE HERO ══════════════════════════════════════════════════════════ -->
+<section class="page-hero" aria-label="Dining at {{ $p.hotel_full_name }}">
+  <div class="page-hero__bg" style="background-image: url('{{ .Site.Params.img_dining_rest }}');"></div>
+  <div class="page-hero__overlay"></div>
+  <div class="page-hero__content container">
+    <span class="eyebrow">Culinary Arts · {{ $p.address_city }}</span>
+    <h1 class="page-hero__title">Dining &amp; Bar</h1>
+  </div>
+</section>
+
+<!-- ══ RESTAURANT INTRO ═══════════════════════════════════════════════════ -->
+<section class="section section--dark" aria-labelledby="restaurant-intro">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 7vw, 7rem); align-items: center;">
+
+      <div class="reveal--left">
+        <span class="eyebrow">Michelin ★ · {{ $p.dining.restaurant_name }}</span>
+        <h2 id="restaurant-intro" style="margin-top: var(--sp-5); margin-bottom: var(--sp-5);">Where the Sea<br>Inspires the Plate</h2>
+        <div class="gold-rule" style="margin-bottom: var(--sp-6);"></div>
+        <p class="lead" style="color: var(--cream);">{{ $p.dining.restaurant_desc }}</p>
+        <div style="margin-top: var(--sp-8); display: flex; flex-direction: column; gap: var(--sp-3);">
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--sp-3) 0; border-bottom: 1px solid var(--border);">
+            <span style="font-size: var(--fs-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted);">Breakfast</span>
+            <span style="font-family: 'Cormorant Garamond', serif; color: var(--gold-light);">{{ $p.breakfast_hours }}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--sp-3) 0; border-bottom: 1px solid var(--border);">
+            <span style="font-size: var(--fs-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted);">Lunch</span>
+            <span style="font-family: 'Cormorant Garamond', serif; color: var(--gold-light);">{{ $p.lunch_hours }}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--sp-3) 0; border-bottom: 1px solid var(--border);">
+            <span style="font-size: var(--fs-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted);">Dinner</span>
+            <span style="font-family: 'Cormorant Garamond', serif; color: var(--gold-light);">{{ $p.dinner_hours }}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: var(--sp-3) 0;">
+            <span style="font-size: var(--fs-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-muted);">Bar</span>
+            <span style="font-family: 'Cormorant Garamond', serif; color: var(--gold-light);">{{ $p.bar_hours }}</span>
+          </div>
+        </div>
+        <div class="btn-group" style="margin-top: var(--sp-8);">
+          <a href="/contact/#dining-reservation" class="btn btn--primary">Reserve a Table</a>
+          <a href="tel:{{ $p.phone_dining }}" class="btn btn--secondary">{{ $p.phone_dining }}</a>
+        </div>
+      </div>
+
+      <div class="reveal--right">
+        <div style="position: relative; aspect-ratio: 3/4; background: var(--card); background-image: linear-gradient(135deg, #0c1420 0%, #1a0e18 100%); overflow: hidden;">
+          <img src="{{ .Site.Params.img_dining_chef }}" alt="Executive Chef Marco Bellini at Azzurra restaurant" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: var(--sp-6); background: linear-gradient(to top, rgba(5,7,13,0.9) 0%, transparent 100%);">
+            <p style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-lg); font-style: italic; color: var(--ivory);">Executive Chef Marco Bellini</p>
+            <p style="font-size: var(--fs-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-top: 4px;">Michelin Star · 2022</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ MENU SECTION ═══════════════════════════════════════════════════════ -->
+{{- /* Collect unique categories in order */ -}}
+{{- $categories := slice -}}
+{{- range $p.menu_items -}}
+  {{- if not (in $categories .category) -}}
+    {{- $categories = $categories | append .category -}}
+  {{- end -}}
+{{- end -}}
+
+<section class="section--void" aria-labelledby="menu-heading" id="menu">
+
+  <!-- Sticky tabs -->
+  <div class="menu-tabs-wrap" role="navigation" aria-label="Menu categories">
+    <div class="menu-tabs" role="tablist" aria-label="Menu categories">
+      {{- range $i, $cat := $categories }}
+      <button
+        class="menu-tab{{ if eq $i 0 }} is-active{{ end }}"
+        role="tab"
+        id="tab-{{ $cat | urlize }}"
+        aria-controls="panel-{{ $cat | urlize }}"
+        aria-selected="{{ if eq $i 0 }}true{{ else }}false{{ end }}"
+        data-tab="{{ $cat | urlize }}"
+      >{{ $cat }}</button>
+      {{- end }}
+    </div>
+  </div>
+
+  <div class="container" style="padding-top: var(--sp-12); padding-bottom: var(--sp-16);">
+
+    <header class="section-header section-header--center" style="margin-bottom: var(--sp-10);">
+      <span class="eyebrow reveal">{{ $p.dining.restaurant_name }} · {{ $p.address_city }}</span>
+      <h2 id="menu-heading" class="reveal" style="transition-delay: 80ms;">The Menu</h2>
+      <div class="gold-rule gold-rule--center reveal" style="transition-delay: 160ms;"></div>
+      <p class="lead reveal" style="transition-delay: 200ms; max-width: 50ch;">Menus change seasonally to honour the finest produce of each passing month.</p>
+    </header>
+
+    {{- range $i, $cat := $categories }}
+    {{- $items := where $p.menu_items "category" $cat }}
+    <div
+      class="menu-panel{{ if eq $i 0 }} is-active{{ end }}"
+      id="panel-{{ $cat | urlize }}"
+      role="tabpanel"
+      aria-labelledby="tab-{{ $cat | urlize }}"
+    >
+      <div class="menu-section-header">
+        <div>
+          <span class="eyebrow eyebrow--no-lines">{{ $cat }}</span>
+          {{- range first 1 $items }}
+          <p class="menu-section-header__it" style="margin-top: var(--sp-2);">{{ .category_it }}</p>
+          {{- end }}
+        </div>
+        <p style="font-size: var(--fs-sm); color: var(--text-muted); max-width: 36ch; text-align: right;">All prices are inclusive of VAT. Allergen information available on request.</p>
+      </div>
+
+      <div class="menu-items-grid">
+        {{- range $items }}
+        <article class="menu-item" aria-label="{{ .name }}">
+          {{- if .featured }}
+          <div style="position: absolute; top: var(--sp-4); right: var(--sp-4);">
+            <span style="width: 6px; height: 6px; background: var(--gold); border-radius: 50%; display: block;"></span>
+          </div>
+          {{- end }}
+
+          <div class="menu-item__top">
+            <h3 class="menu-item__name">{{ .name }}</h3>
+            <span class="menu-item__price">{{ .currency }}{{ .price }}</span>
+          </div>
+
+          <p class="menu-item__desc">{{ .description }}</p>
+
+          <div class="menu-item__footer">
+            {{- if .badge }}
+            <span class="menu-badge">{{ .badge }}</span>
+            {{- end }}
+            {{- range .dietary }}
+            <span class="dietary-tag">
+              {{- if eq . "vegetarian" }}🌿 Vegetarian
+              {{- else if eq . "vegan" }}🌱 Vegan
+              {{- else if eq . "gluten-free" }}⊘ Gluten-Free
+              {{- else if eq . "dairy-free" }}⊘ Dairy-Free
+              {{- else }}{{ . }}
+              {{- end }}
+            </span>
+            {{- end }}
+          </div>
+        </article>
+        {{- end }}
+      </div>
+
+    </div>{{/* end panel */}}
+    {{- end }}
+
+    <!-- Tasting Menu CTA -->
+    <div class="reveal" style="margin-top: var(--sp-16); padding: var(--sp-10) var(--sp-8); background: var(--card); border: 1px solid rgba(184,144,74,0.2); text-align: center; display: flex; flex-direction: column; align-items: center; gap: var(--sp-5);">
+      <span class="eyebrow">Signature Experience</span>
+      <h3 style="font-size: var(--fs-2xl);">The Grand Tasting Menu</h3>
+      <div class="gold-rule gold-rule--center"></div>
+      <p class="lead" style="max-width: 52ch; font-size: var(--fs-base);">Seven courses crafted by Chef Bellini, paired with wines selected by our sommelier. An unhurried journey through the best of the Ligurian coast and beyond.</p>
+      <div class="btn-group" style="justify-content: center;">
+        <span style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-2xl); color: var(--gold);">€185 <span style="font-size: var(--fs-base); color: var(--text-subdued);">per person</span></span>
+        <a href="/contact/#dining-reservation" class="btn btn--primary btn--lg">Reserve the Experience</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══ BAR SECTION ════════════════════════════════════════════════════════ -->
+<section id="bar" class="section section--dark" aria-labelledby="bar-heading">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 7vw, 7rem); align-items: center;">
+
+      <div style="position: relative; aspect-ratio: 4/3; overflow: hidden; background: var(--card); background-image: linear-gradient(135deg, #0a1020 0%, #1a0810 100%);" class="reveal--left">
+        <img src="/images/dining/bar.jpg" alt="{{ $p.dining.bar_name }} — signature cocktails at sunset" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+        <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,7,13,0.6) 0%, transparent 60%);"></div>
+      </div>
+
+      <div class="reveal--right">
+        <span class="eyebrow">{{ $p.bar_hours }}</span>
+        <h2 id="bar-heading" style="margin-top: var(--sp-5); margin-bottom: var(--sp-5);">{{ $p.dining.bar_name }}</h2>
+        <div class="gold-rule" style="margin-bottom: var(--sp-6);"></div>
+        <p class="lead" style="color: var(--cream);">{{ $p.dining.bar_desc }}</p>
+        <p style="margin-top: var(--sp-5); font-size: var(--fs-sm); font-weight: 300; color: var(--text-subdued); line-height: 1.8;">
+          Our bar programme celebrates the extraordinary botanicals of Liguria — wild juniper from hillside forests, hand-harvested lemons from the Amalfi terraces, and vermouths aged in century-old barrels.
+        </p>
+        <a href="#panel-cocktails" class="arrow-link" style="margin-top: var(--sp-6);" data-scroll-to-tab="Cocktails">View Cocktail Menu</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ TERRACE SECTION ════════════════════════════════════════════════════ -->
+<section id="terrace" class="section section--light" aria-labelledby="terrace-heading">
+  <div class="container">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: clamp(3rem, 7vw, 7rem); align-items: center;">
+
+      <div class="reveal--left">
+        <span class="eyebrow" style="color: var(--gold-dark);">Al Fresco · Sea Views · {{ $p.lunch_hours }} &amp; {{ $p.dinner_hours }}</span>
+        <h2 id="terrace-heading" style="margin-top: var(--sp-5); margin-bottom: var(--sp-5); color: var(--text-on-light);">{{ $p.dining.terrace_name }}</h2>
+        <div class="gold-rule" style="background: linear-gradient(90deg, transparent, var(--gold-dark), transparent); margin-bottom: var(--sp-6);"></div>
+        <p style="font-size: var(--fs-lg); font-weight: 300; color: var(--text-body-light); line-height: 1.75;">{{ $p.dining.terrace_desc }}</p>
+        <p style="margin-top: var(--sp-5); font-size: var(--fs-sm); font-weight: 300; color: var(--text-body-light); line-height: 1.9;">
+          Perched at the very edge of the headland, La Terrazza offers sixty seats under a canopy of olive trees, each table commanding an unbroken view of the Ligurian sea. The menu is lighter, freer, and perfectly suited to long summer lunches and candlelit evenings.
+        </p>
+        <div class="btn-group" style="margin-top: var(--sp-8);">
+          <a href="/contact/#dining-reservation" class="btn btn--primary" style="background: var(--gold-dark); border-color: var(--gold-dark);">Reserve La Terrazza</a>
+        </div>
+      </div>
+
+      <div style="position: relative; aspect-ratio: 4/3; overflow: hidden; background: var(--parchment); background-image: linear-gradient(135deg, #e8e0d0 0%, #d8c8a8 100%);" class="reveal--right">
+        <img src="{{ .Site.Params.img_dining_terrace }}" alt="La Terrazza — outdoor dining with panoramic sea views" style="width:100%;height:100%;object-fit:cover;" loading="lazy">
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{{- partial "sections/cta-booking.html" . -}}
+
+{{ end }}

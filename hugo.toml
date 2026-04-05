@@ -1,0 +1,697 @@
+# =============================================================================
+#  GRAND AZURA HOTEL — hugo.toml
+#  Master Configuration File
+#  All site data is defined here. Layouts read exclusively from these params.
+#  To rebrand: change this file only.
+# =============================================================================
+
+# ── Core Hugo Settings ────────────────────────────────────────────────────────
+baseURL       = "https://www.grandazura.com/"
+languageCode  = "en-us"
+title         = "Grand Azura Hotel & Spa"
+theme         = ""          # Using custom layouts; no theme directory needed
+paginate      = 9
+enableRobotsTXT = true
+enableGitInfo   = false
+copyright       = "© 2025 Grand Azura Hotel & Spa. All rights reserved."
+
+# ── Output Formats ────────────────────────────────────────────────────────────
+[outputs]
+  home    = ["HTML", "RSS"]
+  section = ["HTML", "RSS"]
+  page    = ["HTML"]
+
+# ── Markup / Rendering ────────────────────────────────────────────────────────
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = true          # Allow raw HTML in markdown content
+  [markup.highlight]
+    style              = "monokai"
+    lineNos            = false
+    noClasses          = false
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel   = 3
+
+# ── Minification ─────────────────────────────────────────────────────────────
+[minify]
+  disableCSS  = false
+  disableHTML = false
+  disableJS   = false
+  disableJSON = false
+  disableSVG  = false
+  disableXML  = false
+  [minify.tdewolff.html]
+    keepConditionalComments = true
+    keepDefaultAttrVals     = true
+    keepDocumentTags        = true
+    keepEndTags             = true
+    keepQuotes              = false
+    keepWhitespace          = false
+
+# ── Image Processing ──────────────────────────────────────────────────────────
+[imaging]
+  quality        = 85
+  resampleFilter = "Lanczos"
+  anchor         = "Smart"
+  bgColor        = "#ffffff"
+
+# =============================================================================
+#  SITE PARAMETERS — The single source of truth for all hotel data
+# =============================================================================
+[params]
+
+  # ── Brand Identity ──────────────────────────────────────────────────────────
+  hotel_name        = "Grand Azura"
+  hotel_full_name   = "Grand Azura Hotel & Spa"
+  hotel_tagline     = "Where Luxury Meets the Mediterranean Soul"
+  hotel_description = "Nestled along the Ligurian coastline, Grand Azura is a five-star sanctuary where century-old elegance fuses with contemporary comfort. Every stay is a curated journey of exceptional dining, restorative spa rituals, and unparalleled views of the azure sea."
+  hotel_short_desc  = "A five-star sanctuary on the Ligurian coast."
+  hotel_since       = "1923"
+  hotel_stars       = 5
+  hotel_category    = "Luxury Boutique Hotel & Spa"
+
+  # ── Contact & Location ──────────────────────────────────────────────────────
+  address_street  = "Via della Riviera, 42"
+  address_city    = "Portofino"
+  address_region  = "Liguria"
+  address_zip     = "16034"
+  address_country = "Italy"
+  address_full    = "Via della Riviera, 42, 16034 Portofino, Liguria, Italy"
+  phone_main      = "+39 0185 269 100"
+  phone_spa       = "+39 0185 269 101"
+  phone_dining    = "+39 0185 269 102"
+  email_general   = "info@grandazura.com"
+  email_bookings  = "reservations@grandazura.com"
+  email_spa       = "spa@grandazura.com"
+  email_events    = "events@grandazura.com"
+  fax             = "+39 0185 269 199"
+
+  # ── Map & Geo ────────────────────────────────────────────────────────────────
+  map_lat         = "44.3024"
+  map_lng         = "9.2096"
+  map_zoom        = "15"
+  map_embed_src   = "https://www.openstreetmap.org/export/embed.html?bbox=9.1996%2C44.2924%2C9.2196%2C44.3124&layer=mapnik&marker=44.3024%2C9.2096"
+  map_link        = "https://www.openstreetmap.org/?mlat=44.3024&mlon=9.2096#map=16/44.3024/9.2096"
+
+  # ── Social Media ─────────────────────────────────────────────────────────────
+  social_instagram  = "https://www.instagram.com/grandazurahotel"
+  social_facebook   = "https://www.facebook.com/grandazurahotel"
+  social_twitter    = "https://twitter.com/grandazura"
+  social_linkedin   = "https://www.linkedin.com/company/grand-azura-hotel"
+  social_tripadvisor = "https://www.tripadvisor.com/Hotel-grand-azura"
+  social_youtube    = "https://www.youtube.com/@grandazura"
+
+  # ── Operating Hours ───────────────────────────────────────────────────────────
+  checkin_time       = "15:00"
+  checkout_time      = "12:00"
+  reception_hours    = "24/7"
+  concierge_hours    = "07:00 – 23:00"
+  breakfast_hours    = "07:00 – 10:30"
+  lunch_hours        = "12:30 – 14:30"
+  dinner_hours       = "19:00 – 22:30"
+  bar_hours          = "11:00 – 01:00"
+  spa_hours          = "09:00 – 21:00"
+  pool_hours         = "08:00 – 20:00"
+  gym_hours          = "06:00 – 22:00"
+  room_service_hours = "24/7"
+
+  # ── SEO & Social Sharing ──────────────────────────────────────────────────────
+  og_image          = "https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?auto=format&fit=crop&w=1200&q=82"
+  twitter_handle    = "@grandazura"
+  twitter_card_type = "summary_large_image"
+  google_analytics  = ""   # Insert GA4 Measurement ID when available
+  schema_type       = "Hotel"
+
+  # ── Booking ───────────────────────────────────────────────────────────────────
+  booking_url       = "https://booking.grandazura.com"
+  booking_phone     = "+39 0185 269 100"
+
+  
+  # ── Hero & Section Background Images (Unsplash CDN) ──────────────────────
+  img_hero_main      = "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1920&q=82"
+  img_about_main     = "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=82"
+  img_about_accent   = "https://images.unsplash.com/photo-1578683289962-9b74b5a84a16?auto=format&fit=crop&w=700&q=82"
+  img_cta_bg         = "https://images.unsplash.com/photo-1455587734955-081b22074882?auto=format&fit=crop&w=1920&q=82"
+  img_contact_hero   = "https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1920&q=82"
+  img_spa_hero       = "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?auto=format&fit=crop&w=1920&q=82"
+  img_spa_main       = "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?auto=format&fit=crop&w=1200&q=82"
+  img_spa_detail     = "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1200&q=82"
+  img_rooms_hero     = "https://images.unsplash.com/photo-1618773928121-c32242e63f39?auto=format&fit=crop&w=1920&q=82"
+  img_dining_rest    = "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1920&q=82"
+  img_dining_chef    = "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=900&q=82"
+  img_dining_bar     = "https://images.unsplash.com/photo-1574096079513-d8259312b785?auto=format&fit=crop&w=1200&q=82"
+  img_dining_terrace = "https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=82"
+
+  # ── Awards & Certifications ───────────────────────────────────────────────────
+  [[params.awards]]
+    name = "Forbes Five-Star Award"
+    year = "2024"
+    icon = "star"
+  [[params.awards]]
+    name = "World's Best Boutique Hotel"
+    year = "2023"
+    icon = "trophy"
+  [[params.awards]]
+    name = "Green Key Certification"
+    year = "2024"
+    icon = "leaf"
+  [[params.awards]]
+    name = "Michelin-Starred Restaurant"
+    year = "2022"
+    icon = "chef"
+
+# =============================================================================
+#  ROOMS & SUITES
+# =============================================================================
+[[params.rooms]]
+  id           = "deluxe-sea-view"
+  name         = "Deluxe Sea View Room"
+  category     = "Rooms"
+  size_sqm     = 42
+  max_guests   = 2
+  bed_type     = "King Bed"
+  floor        = "2nd – 4th"
+  view         = "Panoramic Sea View"
+  image        = "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?auto=format&fit=crop&w=1200&q=82"
+  price_eur    = 480
+  price_label  = "from €480 / night"
+  description  = "A haven of understated luxury with floor-to-ceiling windows framing the endless blue of the Ligurian Sea. Bespoke Italian furnishings, a marble en-suite, and a private terrace create an atmosphere of serene indulgence."
+  featured     = true
+  [[params.rooms.amenities]]
+    list = ["Private Terrace", "Nespresso Machine", "Marble En-Suite", "Rain Shower", "Egyptian Cotton Linens", "Mini Bar", "Smart TV", "In-room Safe", "Bathrobe & Slippers", "Turndown Service"]
+
+[[params.rooms]]
+  id           = "junior-suite"
+  name         = "Junior Suite"
+  category     = "Suites"
+  size_sqm     = 68
+  max_guests   = 2
+  bed_type     = "Super-King Bed"
+  floor        = "4th – 5th"
+  view         = "Sea & Garden View"
+  image        = "https://images.unsplash.com/photo-1591088398332-8a7791972843?auto=format&fit=crop&w=1200&q=82"
+  price_eur    = 720
+  price_label  = "from €720 / night"
+  description  = "An expansive suite defined by hand-painted frescoes, antique Genoese ceramics, and a lavish separate living area. The oversized soaking tub overlooks the coastline — a truly cinematic setting."
+  featured     = true
+  [[params.rooms.amenities]]
+    list = ["Separate Living Room", "Soaking Tub with Sea View", "Double Vanity", "Walk-in Wardrobe", "Nespresso & Tea Station", "Premium Mini Bar", "Pillow Menu", "Butler Service", "Twice-Daily Housekeeping", "Complimentary Minibar"]
+
+[[params.rooms]]
+  id           = "grand-suite"
+  name         = "Grand Azura Suite"
+  category     = "Suites"
+  size_sqm     = 115
+  max_guests   = 3
+  bed_type     = "Super-King + Pullout"
+  floor        = "6th (Penthouse Level)"
+  view         = "360° Sea & Village View"
+  image        = "https://images.unsplash.com/photo-1561501900-3701fa6a0864?auto=format&fit=crop&w=1200&q=82"
+  price_eur    = 1450
+  price_label  = "from €1,450 / night"
+  description  = "The crown jewel of Grand Azura. A full-floor penthouse suite with a private rooftop terrace, plunge pool, and dedicated butler. Bespoke furnishings by Milanese artisans, a grand piano, and a wine cellar curated by our sommelier."
+  featured     = true
+  [[params.rooms.amenities]]
+    list = ["Private Rooftop Terrace", "Plunge Pool", "Grand Piano", "Private Wine Cellar", "Dedicated Butler 24/7", "Gourmet Kitchen", "Home Theatre System", "Dressing Room", "Private Dining Service", "Airport Transfer Included", "Daily Spa Credit €200"]
+
+[[params.rooms]]
+  id           = "garden-room"
+  name         = "Classic Garden Room"
+  category     = "Rooms"
+  size_sqm     = 35
+  max_guests   = 2
+  bed_type     = "Queen Bed"
+  floor        = "1st – 2nd"
+  view         = "Garden & Courtyard"
+  image        = "https://images.unsplash.com/photo-1540518614846-7eded433c457?auto=format&fit=crop&w=1200&q=82"
+  price_eur    = 320
+  price_label  = "from €320 / night"
+  description  = "A tranquil retreat surrounded by the fragrance of Mediterranean gardens. Hand-crafted terracotta floors, whitewashed walls, and artisanal textiles evoke the authentic charm of the Ligurian riviera."
+  featured     = false
+  [[params.rooms.amenities]]
+    list = ["Garden Terrace Access", "Nespresso Machine", "Marble Bathroom", "Rain Shower", "Egyptian Cotton Linens", "Mini Bar", "Smart TV", "Air Conditioning", "Bathrobe & Slippers", "Daily Housekeeping"]
+
+[[params.rooms]]
+  id           = "family-suite"
+  name         = "Family Sea Suite"
+  category     = "Suites"
+  size_sqm     = 92
+  max_guests   = 4
+  bed_type     = "King + Twin Room"
+  floor        = "3rd – 4th"
+  view         = "Sea View"
+  image        = "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6?auto=format&fit=crop&w=1200&q=82"
+  price_eur    = 980
+  price_label  = "from €980 / night"
+  description  = "Thoughtfully designed for families, with a spacious main bedroom, a connected twin room, and a shared living area. Children's welcome amenities, a cot-on-request, and direct pool access make this an effortless luxury escape for all ages."
+  featured     = false
+  [[params.rooms.amenities]]
+    list = ["Connected Twin Bedroom", "Shared Living Room", "Children's Welcome Pack", "Cot on Request", "Baby Monitor", "Pool Access", "Two Bathrooms", "Family Dining Area", "Kids' Menu Available", "In-room Games Console"]
+
+# =============================================================================
+#  DINING — MENU DATA
+# =============================================================================
+[params.dining]
+  restaurant_name   = "Azzurra"
+  restaurant_desc   = "Our Michelin-starred restaurant celebrates the extraordinary produce of the Ligurian coast. Executive Chef Marco Bellini weaves ancient recipes with avant-garde technique, delivering tasting menus that are as much artwork as sustenance."
+  bar_name          = "Il Tramonto Bar"
+  bar_desc          = "As the sun dissolves into the sea, Il Tramonto comes alive. Our mixologists craft signature cocktails with locally-foraged botanicals, rare Italian vermouths, and artisanal spirits from the Ligurian hills."
+  terrace_name      = "La Terrazza"
+  terrace_desc      = "Al fresco dining at its most spectacular. La Terrazza serves a curated à la carte menu with uninterrupted sea views. Perfect for a leisurely lunch or a romantic dinner under the stars."
+
+# ── Menu: Antipasti ───────────────────────────────────────────────────────────
+[[params.menu_items]]
+  category     = "Antipasti"
+  category_it  = "Starters"
+  sort_order   = 1
+  name         = "Carpaccio di Tonno"
+  description  = "Yellowfin tuna, Taggiasca olive emulsion, Pantelleria capers, micro basil, Sicilian lemon oil"
+  price        = "32"
+  currency     = "€"
+  badge        = "Chef's Selection"
+  dietary      = ["gluten-free", "dairy-free"]
+  featured     = true
+
+[[params.menu_items]]
+  category     = "Antipasti"
+  category_it  = "Starters"
+  sort_order   = 1
+  name         = "Burrata della Casa"
+  description  = "Hand-stretched burrata, heirloom tomatoes, Ligurian basil pesto, balsamic di Modena IGP, focaccia croustini"
+  price        = "28"
+  currency     = "€"
+  badge        = ""
+  dietary      = ["vegetarian"]
+  featured     = false
+
+[[params.menu_items]]
+  category     = "Antipasti"
+  category_it  = "Starters"
+  sort_order   = 1
+  name         = "Insalata di Gamberi"
+  description  = "Adriatic red prawns, avocado cream, pink grapefruit, shiso, crispy quinoa, yuzu dressing"
+  price        = "36"
+  currency     = "€"
+  badge        = "New"
+  dietary      = ["gluten-free"]
+  featured     = false
+
+[[params.menu_items]]
+  category     = "Antipasti"
+  category_it  = "Starters"
+  sort_order   = 1
+  name         = "Uovo Perfetto"
+  description  = "65°C egg, black truffle shavings, Parmigiano Reggiano cream, crispy guanciale, sourdough"
+  price        = "30"
+  currency     = "€"
+  badge        = ""
+  dietary      = ["vegetarian"]
+  featured     = false
+
+# ── Menu: Primi Piatti ────────────────────────────────────────────────────────
+[[params.menu_items]]
+  category     = "Primi Piatti"
+  category_it  = "First Courses"
+  sort_order   = 2
+  name         = "Tagliolini al Granchio"
+  description  = "Fresh egg tagliolini, Portofino spider crab, bisque reduction, bottarga di muggine, sea urchin foam"
+  price        = "48"
+  currency     = "€"
+  badge        = "Signature"
+  dietary      = []
+  featured     = true
+
+[[params.menu_items]]
+  category     = "Primi Piatti"
+  category_it  = "First Courses"
+  sort_order   = 2
+  name         = "Risotto Nero di Seppia"
+  description  = "Carnaroli risotto, cuttlefish ink, calamari, stracciatella, toasted breadcrumbs, smoked paprika oil"
+  price        = "44"
+  currency     = "€"
+  badge        = ""
+  dietary      = ["gluten-free"]
+  featured     = false
+
+[[params.menu_items]]
+  category     = "Primi Piatti"
+  category_it  = "First Courses"
+  sort_order   = 2
+  name         = "Trofie al Pesto Genovese"
+  description  = "House-made trofie pasta, authentic Genovese basil pesto DOP, green beans, Bonotte potatoes, aged Parmigiano"
+  price        = "36"
+  currency     = "€"
+  badge        = "Classic"
+  dietary      = ["vegetarian"]
+  featured     = false
+
+[[params.menu_items]]
+  category     = "Primi Piatti"
+  category_it  = "First Courses"
+  sort_order   = 2
+  name         = "Gnocchi di Patate"
+  description  = "Hand-rolled potato gnocchi, 48-hour braised oxtail, aged Parmigiano fonduta, black pepper, micro herbs"
+  price        = "42"
+  currency     = "€"
+  badge        = ""
+  dietary      = []
+  featured     = false
+
+# ── Menu: Secondi Piatti ──────────────────────────────────────────────────────
+[[params.menu_items]]
+  category     = "Secondi Piatti"
+  category_it  = "Main Courses"
+  sort_order   = 3
+  name         = "Branzino al Sale"
+  description  = "Whole salt-crust sea bass, saffron aioli, charred lemon, Taggiasca olive tapenade, baby fennel"
+  price        = "62"
+  currency     = "€"
+  badge        = "Chef's Selection"
+  dietary      = ["gluten-free", "dairy-free"]
+  featured     = true
+
+[[params.menu_items]]
+  category     = "Secondi Piatti"
+  category_it  = "Main Courses"
+  sort_order   = 3
+  name         = "Filetto di Manzo"
+  description  = "Dry-aged Piedmontese beef fillet, foie gras, black truffle jus, pomme purée Robuchon, haricots verts"
+  price        = "78"
+  currency     = "€"
+  badge        = ""
+  dietary      = ["gluten-free"]
+  featured     = false
+
+[[params.menu_items]]
+  category     = "Secondi Piatti"
+  category_it  = "Main Courses"
+  sort_order   = 3
+  name         = "Agnello della Riviera"
+  description  = "Slow-roasted rack of lamb, Mediterranean herb crust, roasted garlic purée, ratatouille Niçoise, rosemary jus"
+  price        = "68"
+  currency     = "€"
+  badge        = "New"
+  dietary      = ["gluten-free"]
+  featured     = false
+
+[[params.menu_items]]
+  category     = "Secondi Piatti"
+  category_it  = "Main Courses"
+  sort_order   = 3
+  name         = "Parmigiana di Melanzane"
+  description  = "Heritage aubergine, San Marzano tomato, triple-layer mozzarella di bufala, fresh basil, Parmigiano crust"
+  price        = "42"
+  currency     = "€"
+  badge        = ""
+  dietary      = ["vegetarian", "gluten-free"]
+  featured     = false
+
+# ── Menu: Desserts ────────────────────────────────────────────────────────────
+[[params.menu_items]]
+  category     = "Desserts"
+  category_it  = "Dolci"
+  sort_order   = 4
+  name         = "Soufflé al Cioccolato"
+  description  = "Valrhona 70% dark chocolate soufflé, Piedmontese hazelnut gelato, praline crumble — allow 15 minutes"
+  price        = "26"
+  currency     = "€"
+  badge        = "Signature"
+  dietary      = ["vegetarian"]
+  featured     = true
+
+[[params.menu_items]]
+  category     = "Desserts"
+  category_it  = "Dolci"
+  sort_order   = 4
+  name         = "Panna Cotta alla Vaniglia"
+  description  = "Madagascan vanilla panna cotta, wild strawberry coulis, candied pistachios, edible flowers"
+  price        = "20"
+  currency     = "€"
+  badge        = ""
+  dietary      = ["vegetarian", "gluten-free"]
+  featured     = false
+
+[[params.menu_items]]
+  category     = "Desserts"
+  category_it  = "Dolci"
+  sort_order   = 4
+  name         = "Tiramisù della Tradizione"
+  description  = "Classic tiramisù, Illy espresso, Savoiardi, Marsala mascarpone, single-origin cocoa"
+  price        = "22"
+  currency     = "€"
+  badge        = "Classic"
+  dietary      = ["vegetarian"]
+  featured     = false
+
+# ── Menu: Signature Cocktails ─────────────────────────────────────────────────
+[[params.menu_items]]
+  category     = "Cocktails"
+  category_it  = "Cocktail Signatures"
+  sort_order   = 5
+  name         = "Azura Mist"
+  description  = "Grey Goose vodka, elderflower cordial, cucumber, lemon verbena, Prosecco DOC, edible violet"
+  price        = "22"
+  currency     = "€"
+  badge        = "House Signature"
+  dietary      = ["vegan"]
+  featured     = true
+
+[[params.menu_items]]
+  category     = "Cocktails"
+  category_it  = "Cocktail Signatures"
+  sort_order   = 5
+  name         = "Riviera Negroni"
+  description  = "Portofino Dry Gin, Campari, Martini Rosso, Ligurian orange twist, smoked rosemary"
+  price        = "20"
+  currency     = "€"
+  badge        = ""
+  dietary      = ["vegan"]
+  featured     = false
+
+[[params.menu_items]]
+  category     = "Cocktails"
+  category_it  = "Cocktail Signatures"
+  sort_order   = 5
+  name         = "Tramonto Spritz"
+  description  = "Aperol, blood orange, Prosecco Superiore, pink peppercorn, dehydrated orange"
+  price        = "18"
+  currency     = "€"
+  badge        = "Bestseller"
+  dietary      = ["vegan"]
+  featured     = false
+
+[[params.menu_items]]
+  category     = "Cocktails"
+  category_it  = "Cocktail Signatures"
+  sort_order   = 5
+  name         = "Limoncello Sour"
+  description  = "House-made Ligurian limoncello, Hendrick's gin, lemon, egg white, lavender bitters"
+  price        = "19"
+  currency     = "€"
+  badge        = ""
+  dietary      = []
+  featured     = false
+
+# =============================================================================
+#  TESTIMONIALS
+# =============================================================================
+[[params.testimonials]]
+  name    = "Isabella Marchetti"
+  origin  = "Milan, Italy"
+  rating  = 5
+  text    = "Grand Azura redefined what luxury means to me. The suite was a masterpiece of design, the food at Azzurra left me speechless, and the staff anticipated every need before I even voiced it. My fifth visit, and still perfect."
+  date    = "November 2024"
+  stay    = "Grand Azura Suite"
+
+[[params.testimonials]]
+  name    = "James & Sophia Whitmore"
+  origin  = "London, United Kingdom"
+  rating  = 5
+  text    = "We chose Grand Azura for our honeymoon after seeing it featured in Condé Nast Traveller. It surpassed every expectation. The rooftop dinner, the spa, the tiny details — the rose petals on the terrace, the handwritten welcome note. Absolutely magical."
+  date    = "September 2024"
+  stay    = "Junior Suite"
+
+[[params.testimonials]]
+  name    = "Dr. Alexandre Dupont"
+  origin  = "Paris, France"
+  rating  = 5
+  text    = "As someone who travels for gastronomy, Azzurra alone justifies the journey to Portofino. Chef Bellini's tagliolini al granchio is the finest pasta I have eaten anywhere in Europe. The wine list is extraordinary. Grand Azura understands true hospitality."
+  date    = "October 2024"
+  stay    = "Deluxe Sea View Room"
+
+[[params.testimonials]]
+  name    = "Yuki Tanaka"
+  origin  = "Tokyo, Japan"
+  rating  = 5
+  text    = "The spa at Grand Azura uses local sea botanicals in a way that is completely unique. I booked the four-night regeneration package and left feeling reborn. Every detail — from the hand-stitched towels to the stone bath — was exquisite."
+  date    = "August 2024"
+  stay    = "Classic Garden Room"
+
+[[params.testimonials]]
+  name    = "The Okonkwo Family"
+  origin  = "Lagos, Nigeria"
+  rating  = 5
+  text    = "Travelling with three children can be stressful, but the Grand Azura team made it completely effortless. The family suite was enormous, the kids loved the pool, and we had private dining on our terrace every evening. Already planning our return."
+  date    = "July 2024"
+  stay    = "Family Sea Suite"
+
+# =============================================================================
+#  SPA SERVICES
+# =============================================================================
+[[params.spa_services]]
+  name        = "Ligurian Sea Ritual"
+  duration    = "120 min"
+  price       = "€280"
+  description = "A full-body journey using cold-pressed sea algae, mineral-rich sea salt, and warm Ligurian olive oil to deeply cleanse, hydrate, and restore luminosity."
+  category    = "Signature Treatments"
+
+[[params.spa_services]]
+  name        = "Mediterranean Hammam"
+  duration    = "90 min"
+  price       = "€210"
+  description = "An authentic hammam experience in our marble steam room, followed by a black soap exfoliation, rose water rinse, and a deeply nourishing argan oil massage."
+  category    = "Signature Treatments"
+
+[[params.spa_services]]
+  name        = "Regenerative Stone Massage"
+  duration    = "75 min"
+  price       = "€185"
+  description = "Heated basalt stones sourced from the Ligurian hills, combined with cold marble, orchestrate a thermal dance that releases deep muscle tension and restores energetic balance."
+  category    = "Massages"
+
+[[params.spa_services]]
+  name        = "Couples' Sanctuary"
+  duration    = "150 min"
+  price       = "€490"
+  description = "A private suite experience for two: side-by-side massages, a shared herbal bath, Champagne, and a personalized aromatherapy consultation."
+  category    = "Couples"
+
+# =============================================================================
+#  FACILITIES & AMENITIES
+# =============================================================================
+[[params.facilities]]
+  icon  = "pool"
+  name  = "Infinity Pool"
+  desc  = "Heated saltwater infinity pool with panoramic sea views, open year-round"
+[[params.facilities]]
+  icon  = "spa"
+  name  = "Azura Spa"
+  desc  = "2,400 m² of spa bliss — hammam, sauna, thermal suite, treatment rooms"
+[[params.facilities]]
+  icon  = "dumbbell"
+  name  = "Fitness Centre"
+  desc  = "State-of-the-art Technogym equipment, yoga studio, personal trainers"
+[[params.facilities]]
+  icon  = "wine"
+  name  = "Wine Cellar"
+  desc  = "Sommelier-curated cellar of 1,200+ labels, private tasting sessions available"
+[[params.facilities]]
+  icon  = "anchor"
+  name  = "Private Marina"
+  desc  = "Exclusive berths for guests, boat excursion booking, water sports desk"
+[[params.facilities]]
+  icon  = "car"
+  name  = "Valet Parking"
+  desc  = "Complimentary valet parking and EV charging stations"
+[[params.facilities]]
+  icon  = "wifi"
+  name  = "Ultra-Fast Wi-Fi"
+  desc  = "5 GHz private network throughout the property — 1 Gbps speeds"
+[[params.facilities]]
+  icon  = "briefcase"
+  name  = "Business Centre"
+  desc  = "Private meeting rooms, event spaces, and secretarial services"
+
+# =============================================================================
+#  NAVIGATION MENUS
+# =============================================================================
+[menus]
+  [[menus.main]]
+    identifier = "home"
+    name       = "Home"
+    url        = "/"
+    weight     = 1
+  [[menus.main]]
+    identifier = "rooms"
+    name       = "Rooms & Suites"
+    url        = "/rooms/"
+    weight     = 2
+  [[menus.main]]
+    identifier = "dining"
+    name       = "Dining"
+    url        = "/dining/"
+    weight     = 3
+  [[menus.main]]
+    identifier = "spa"
+    name       = "Spa & Wellness"
+    url        = "/spa/"
+    weight     = 4
+  [[menus.main]]
+    identifier = "gallery"
+    name       = "Gallery"
+    url        = "/gallery/"
+    weight     = 5
+  [[menus.main]]
+    identifier = "contact"
+    name       = "Contact"
+    url        = "/contact/"
+    weight     = 6
+
+  [[menus.main]]
+    identifier = "booking"
+    name       = "Book Now"
+    url        = "/booking/"
+    weight     = 7
+
+  [[menus.footer_col1]]
+    name   = "Rooms & Suites"
+    url    = "/rooms/"
+    weight = 1
+  [[menus.footer_col1]]
+    name   = "Dining"
+    url    = "/dining/"
+    weight = 2
+  [[menus.footer_col1]]
+    name   = "Spa & Wellness"
+    url    = "/spa/"
+    weight = 3
+  [[menus.footer_col1]]
+    name   = "Gallery"
+    url    = "/gallery/"
+    weight = 4
+
+  [[menus.footer_col2]]
+    name   = "About Us"
+    url    = "/about/"
+    weight = 1
+  [[menus.footer_col2]]
+    name   = "Press & Media"
+    url    = "/press/"
+    weight = 2
+  [[menus.footer_col2]]
+    name   = "Careers"
+    url    = "/careers/"
+    weight = 3
+  [[menus.footer_col2]]
+    name   = "Privacy Policy"
+    url    = "/privacy/"
+    weight = 4
+
+  [[menus.footer_col3]]
+    name   = "Contact"
+    url    = "/contact/"
+    weight = 1
+  [[menus.footer_col3]]
+    name   = "Make a Reservation"
+    url    = "https://booking.grandazura.com"
+    weight = 2
+  [[menus.footer_col3]]
+    name   = "Gift Vouchers"
+    url    = "/gift-vouchers/"
+    weight = 3
+  [[menus.footer_col3]]
+    name   = "Loyalty Programme"
+    url    = "/loyalty/"
+    weight = 4
+

@@ -1,0 +1,58 @@
+[build]
+  publish = "public"
+  command = "hugo --minify"
+
+[build.environment]
+  HUGO_VERSION = "0.128.0"
+  HUGO_ENV     = "production"
+  NODE_ENV     = "production"
+  TZ           = "Europe/Rome"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options         = "SAMEORIGIN"
+    X-XSS-Protection        = "1; mode=block"
+    X-Content-Type-Options  = "nosniff"
+    Referrer-Policy         = "strict-origin-when-cross-origin"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains; preload"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=15552000, stale-while-revalidate=86400"
+
+[[headers]]
+  for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=15552000, stale-while-revalidate=86400"
+
+[[redirects]]
+  from  = "/dining"
+  to    = "/dining/"
+  status = 301
+
+[[redirects]]
+  from  = "/rooms"
+  to    = "/rooms/"
+  status = 301
+
+[[redirects]]
+  from  = "/spa"
+  to    = "/spa/"
+  status = 301
+
+[[redirects]]
+  from  = "/contact"
+  to    = "/contact/"
+  status = 301
+
+[[redirects]]
+  from  = "/*"
+  to    = "/404.html"
+  status = 404

@@ -1,0 +1,276 @@
+{{ define "main" }}
+{{- $p := .Site.Params -}}
+
+<!-- ══ PAGE HERO ══════════════════════════════════════════════════════════ -->
+<section class="page-hero" aria-label="Contact {{ $p.hotel_full_name }}">
+  <div class="page-hero__bg" style="background-image: url('{{ .Site.Params.img_contact_hero }}'); background-position: center 60%;"></div>
+  <div class="page-hero__overlay"></div>
+  <div class="page-hero__content container">
+    <span class="eyebrow">We Are Here for You</span>
+    <h1 class="page-hero__title">Contact &amp; Reservations</h1>
+  </div>
+</section>
+
+<!-- ══ CONTACT GRID ═══════════════════════════════════════════════════════ -->
+<section class="section section--dark" aria-labelledby="contact-heading">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- Left: Info -->
+      <div style="display: flex; flex-direction: column; gap: var(--sp-6);">
+
+        <div class="reveal--left">
+          <span class="eyebrow">Get in Touch</span>
+          <h2 id="contact-heading" style="margin-top: var(--sp-4); margin-bottom: var(--sp-4);">We'd Love<br>to Hear From You</h2>
+          <div class="gold-rule" style="margin-bottom: var(--sp-6);"></div>
+          <p class="lead" style="color: var(--cream); font-size: var(--fs-base);">Whether you are planning a first visit or returning to us after many years, our team is here to ensure your experience is flawless before you even arrive.</p>
+        </div>
+
+        <div class="contact-info-card reveal--left" style="transition-delay: 100ms;">
+
+          <div class="contact-info-item">
+            <span class="contact-info-label">Address</span>
+            <address style="font-style: normal;">
+              <span class="contact-info-value">{{ $p.address_street }}</span>
+              <span class="contact-info-sub">{{ $p.address_zip }} {{ $p.address_city }}, {{ $p.address_region }}, {{ $p.address_country }}</span>
+            </address>
+            <a href="{{ $p.map_link }}" target="_blank" rel="noopener noreferrer" class="arrow-link" style="margin-top: var(--sp-2); font-size: calc(var(--fs-xs) * 0.9);">View on Map</a>
+          </div>
+
+          <div class="contact-info-item">
+            <span class="contact-info-label">Main Telephone</span>
+            <a href="tel:{{ $p.phone_main }}" class="contact-info-value" style="transition: color var(--t-fast);">{{ $p.phone_main }}</a>
+            <span class="contact-info-sub">Reception · 24/7</span>
+          </div>
+
+          <div class="contact-info-item">
+            <span class="contact-info-label">Reservations</span>
+            <a href="mailto:{{ $p.email_bookings }}" class="contact-info-value" style="transition: color var(--t-fast);">{{ $p.email_bookings }}</a>
+            <a href="tel:{{ $p.phone_main }}" class="contact-info-sub" style="transition: color var(--t-fast);">{{ $p.phone_main }}</a>
+          </div>
+
+          <div class="contact-info-item">
+            <span class="contact-info-label">Spa &amp; Wellness</span>
+            <a href="mailto:{{ $p.email_spa }}" class="contact-info-value" style="transition: color var(--t-fast);">{{ $p.email_spa }}</a>
+            <a href="tel:{{ $p.phone_spa }}" class="contact-info-sub" style="transition: color var(--t-fast);">{{ $p.phone_spa }}</a>
+          </div>
+
+          <div class="contact-info-item">
+            <span class="contact-info-label">Events &amp; Groups</span>
+            <a href="mailto:{{ $p.email_events }}" class="contact-info-value" style="transition: color var(--t-fast);">{{ $p.email_events }}</a>
+          </div>
+
+        </div>
+
+        <!-- Operating Hours -->
+        <div class="reveal--left" style="transition-delay: 200ms;">
+          <h3 style="font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: var(--sp-5);">Operating Hours</h3>
+          <div class="hours-grid">
+            <div class="hours-item">
+              <span class="hours-label">Check-in</span>
+              <span class="hours-time">{{ $p.checkin_time }}</span>
+            </div>
+            <div class="hours-item">
+              <span class="hours-label">Check-out</span>
+              <span class="hours-time">{{ $p.checkout_time }}</span>
+            </div>
+            <div class="hours-item">
+              <span class="hours-label">Reception</span>
+              <span class="hours-time">{{ $p.reception_hours }}</span>
+            </div>
+            <div class="hours-item">
+              <span class="hours-label">Concierge</span>
+              <span class="hours-time">{{ $p.concierge_hours }}</span>
+            </div>
+            <div class="hours-item">
+              <span class="hours-label">Breakfast</span>
+              <span class="hours-time">{{ $p.breakfast_hours }}</span>
+            </div>
+            <div class="hours-item">
+              <span class="hours-label">Dinner</span>
+              <span class="hours-time">{{ $p.dinner_hours }}</span>
+            </div>
+            <div class="hours-item">
+              <span class="hours-label">Bar</span>
+              <span class="hours-time">{{ $p.bar_hours }}</span>
+            </div>
+            <div class="hours-item">
+              <span class="hours-label">Spa</span>
+              <span class="hours-time">{{ $p.spa_hours }}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right: Form -->
+      <div class="reveal--right">
+        <div style="padding: var(--sp-10) var(--sp-8); background: var(--card); border: 1px solid var(--border);">
+          <h3 style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-2xl); color: var(--ivory); margin-bottom: var(--sp-2);">Send Us a Message</h3>
+          <p style="font-size: var(--fs-sm); font-weight: 300; color: var(--text-subdued); margin-bottom: var(--sp-8);">We respond to all enquiries within 24 hours.</p>
+
+          <form
+            id="dining-reservation"
+            class="contact-form"
+            action="#"
+            method="post"
+            novalidate
+            aria-label="Contact form"
+          >
+            <div class="form-row">
+              <div class="form-group">
+                <label for="first-name" class="form-label">First Name <span aria-hidden="true">*</span></label>
+                <input type="text" id="first-name" name="first_name" class="form-input" placeholder="Valentina" required autocomplete="given-name">
+              </div>
+              <div class="form-group">
+                <label for="last-name" class="form-label">Last Name <span aria-hidden="true">*</span></label>
+                <input type="text" id="last-name" name="last_name" class="form-input" placeholder="Moretti" required autocomplete="family-name">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="email" class="form-label">Email Address <span aria-hidden="true">*</span></label>
+                <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" required autocomplete="email">
+              </div>
+              <div class="form-group">
+                <label for="phone" class="form-label">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="form-input" placeholder="+39 000 000 0000" autocomplete="tel">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="enquiry-type" class="form-label">Type of Enquiry <span aria-hidden="true">*</span></label>
+              <select id="enquiry-type" name="enquiry_type" class="form-select" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="reservation">Room Reservation</option>
+                <option value="dining">Dining Reservation</option>
+                <option value="spa">Spa Booking</option>
+                <option value="event">Private Event / Wedding</option>
+                <option value="group">Group Booking</option>
+                <option value="general">General Enquiry</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="checkin" class="form-label">Arrival Date</label>
+                <input type="date" id="checkin" name="checkin" class="form-input">
+              </div>
+              <div class="form-group">
+                <label for="checkout" class="form-label">Departure Date</label>
+                <input type="date" id="checkout" name="checkout" class="form-input">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="guests" class="form-label">Number of Guests</label>
+              <select id="guests" name="guests" class="form-select">
+                <option value="">Select</option>
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5+">5+ Guests</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="message" class="form-label">Your Message <span aria-hidden="true">*</span></label>
+              <textarea
+                id="message"
+                name="message"
+                class="form-textarea"
+                placeholder="Tell us about your stay, special requests, dietary requirements, or any questions you may have..."
+                required
+                rows="5"
+              ></textarea>
+            </div>
+
+            <div style="display: flex; align-items: flex-start; gap: var(--sp-3);">
+              <input type="checkbox" id="privacy" name="privacy" required style="margin-top: 3px; accent-color: var(--gold); width: 16px; height: 16px; flex-shrink: 0;">
+              <label for="privacy" style="font-size: var(--fs-xs); color: var(--text-subdued); line-height: 1.6; cursor: pointer;">
+                I have read and agree to the <a href="/privacy/" style="color: var(--gold); text-decoration: underline;">Privacy Policy</a>. My data will be used solely to respond to this enquiry.
+              </label>
+            </div>
+
+            <button type="submit" class="btn btn--primary" style="width: 100%; justify-content: center; padding: var(--sp-5);">
+              Send Enquiry
+            </button>
+
+            <!-- Success / error messages (shown by JS) -->
+            <div id="form-success" class="hidden" style="padding: var(--sp-5); background: rgba(0,180,120,0.1); border: 1px solid rgba(0,180,120,0.3); text-align: center; color: #4cd4a0;">
+              <p style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-lg);">Thank you for your message.</p>
+              <p style="font-size: var(--fs-sm); margin-top: var(--sp-2); color: inherit; opacity: 0.8;">Our team will respond within 24 hours.</p>
+            </div>
+            <div id="form-error" class="hidden" style="padding: var(--sp-5); background: rgba(200,60,60,0.1); border: 1px solid rgba(200,60,60,0.3); text-align: center; color: #e08080;">
+              <p style="font-size: var(--fs-sm);">There was an error sending your message. Please call us directly at <a href="tel:{{ $p.phone_main }}" style="color: var(--gold-light);">{{ $p.phone_main }}</a>.</p>
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div><!-- /.contact-grid -->
+  </div>
+</section>
+
+<!-- ══ MAP ════════════════════════════════════════════════════════════════ -->
+<section class="section--void" style="padding-block: 0;" aria-label="Hotel location map">
+  <div style="max-width: 100%;">
+    <div style="padding: var(--sp-10) var(--container-pad) var(--sp-6); max-width: var(--container-max); margin: 0 auto;">
+      <div style="display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); flex-wrap: wrap;">
+        <div>
+          <span class="eyebrow" style="margin-bottom: var(--sp-3);">Getting Here</span>
+          <h2 style="font-size: var(--fs-2xl); margin-top: var(--sp-3);">Find Grand Azura</h2>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--sp-3); text-align: right;">
+          <p style="font-size: var(--fs-sm); font-weight: 300; color: var(--text-subdued);">
+            45 min from Genoa Cristoforo Colombo Airport<br>
+            3h 30min from Milan Malpensa Airport<br>
+            Private helicopter transfers available
+          </p>
+          <a href="{{ $p.map_link }}" target="_blank" rel="noopener noreferrer" class="arrow-link" style="justify-content: flex-end;">Open in Maps</a>
+        </div>
+      </div>
+    </div>
+    <div class="map-wrap" style="height: 480px; border-radius: 0;">
+      <iframe
+        src="{{ $p.map_embed_src }}"
+        title="Grand Azura Hotel location on OpenStreetMap"
+        loading="lazy"
+        aria-label="Interactive map showing Grand Azura Hotel location in Portofino, Liguria"
+      ></iframe>
+      <div class="map-overlay" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TRANSPORT ══════════════════════════════════════════════════════════ -->
+<section class="section section--dark" aria-labelledby="transport-heading">
+  <div class="container">
+    <div style="text-align: center; margin-bottom: var(--sp-12);">
+      <span class="eyebrow reveal">Arrival Options</span>
+      <h2 id="transport-heading" class="reveal" style="transition-delay: 80ms; margin-top: var(--sp-4);">We'll Take Care of Everything</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4);" class="stagger">
+      {{- $transport := slice
+        (dict "icon" "✈️" "title" "By Air" "desc" "Private transfers from Genoa (GNB), Nice (NCE), and Milan (MXP). Helicopter landing pad available on request.")
+        (dict "icon" "🚤" "title" "By Sea" "desc" "Arrive directly to our private marina. Berths available for yachts up to 45m. Shore power and water included.")
+        (dict "icon" "🚗" "title" "By Road" "desc" "Complimentary valet parking. From Genoa: A7 motorway to Recco, then SS1 Via Aurelia south. Journey: approximately 35 minutes.")
+      -}}
+      {{- range $transport }}
+      <div class="reveal" style="padding: var(--sp-8) var(--sp-7); background: var(--card); border: 1px solid var(--border); text-align: center; display: flex; flex-direction: column; gap: var(--sp-4); align-items: center;">
+        <span style="font-size: 2.8rem;" aria-hidden="true">{{ .icon }}</span>
+        <h3 style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-xl); color: var(--ivory);">{{ .title }}</h3>
+        <p style="font-size: var(--fs-sm); color: var(--text-subdued); font-weight: 300; line-height: 1.7;">{{ .desc }}</p>
+      </div>
+      {{- end }}
+    </div>
+    <div style="text-align: center; margin-top: var(--sp-10);" class="reveal">
+      <p style="font-size: var(--fs-sm); color: var(--text-subdued);">For bespoke transfer arrangements: <a href="tel:{{ $p.phone_main }}" style="color: var(--gold-light);">{{ $p.phone_main }}</a> · <a href="mailto:{{ $p.email_general }}" style="color: var(--gold-light);">{{ $p.email_general }}</a></p>
+    </div>
+  </div>
+</section>
+
+{{ end }}

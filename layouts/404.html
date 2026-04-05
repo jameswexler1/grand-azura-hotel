@@ -1,0 +1,26 @@
+{{ define "main" }}
+<section style="
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: var(--sp-12) var(--container-pad);
+  background: var(--void);
+  position: relative;
+  overflow: hidden;
+">
+  <div style="position: absolute; inset: 0; background: radial-gradient(ellipse at center, rgba(184,144,74,0.04) 0%, transparent 70%);"></div>
+  <div style="position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; gap: var(--sp-6);">
+    <span class="eyebrow">Grand Azura Hotel</span>
+    <p style="font-family: 'Cormorant Garamond', serif; font-size: clamp(6rem, 15vw, 12rem); font-weight: 300; color: rgba(184,144,74,0.15); line-height: 1; margin: 0;">404</p>
+    <h1 style="font-size: var(--fs-3xl); font-weight: 300; font-style: italic; color: var(--ivory); margin-top: -2rem;">Page Not Found</h1>
+    <p class="lead" style="max-width: 44ch; color: var(--text-subdued);">The page you are looking for may have been moved or no longer exists. Allow us to guide you back.</p>
+    <div class="btn-group" style="justify-content: center; margin-top: var(--sp-4);">
+      <a href="/" class="btn btn--primary">Return Home</a>
+      <a href="/contact/" class="btn btn--secondary">Contact Us</a>
+    </div>
+  </div>
+</section>
+{{ end }}

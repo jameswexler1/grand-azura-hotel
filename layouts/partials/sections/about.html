@@ -1,0 +1,62 @@
+{{- $p := .Site.Params -}}
+<section class="section section--light" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="about-split">
+      <div class="about-img-wrap reveal--left">
+        <img
+          src="{{ $p.img_about_main }}"
+          alt="The historic facade of Grand Azura Hotel, Portofino"
+          class="about-img-main"
+          loading="lazy"
+          width="640" height="820"
+        >
+        <img
+          src="{{ $p.img_about_accent }}"
+          alt="Interior detail — hand-crafted Ligurian ceramic"
+          class="about-img-accent"
+          loading="lazy"
+          width="320" height="320"
+        >
+        <div class="about-img-year">
+          <span class="about-img-year__label">Since</span>
+          <span class="about-img-year__number">{{ $p.hotel_since }}</span>
+        </div>
+      </div>
+      <div class="about-content reveal--right">
+        <span class="eyebrow">Our Story</span>
+        <h2 id="about-heading">A Century of<br>Ligurian Elegance</h2>
+        <div class="gold-rule"></div>
+        <p class="lead--light" style="color: var(--text-body-light);">
+          Grand Azura was born from the dream of Countess Valentina Moretti — a woman who believed
+          that true luxury is not the accumulation of things, but the depth of an experience.
+        </p>
+        <p style="font-size: var(--fs-sm); font-weight: 300; color: var(--text-body-light); line-height: 1.9;">
+          In {{ $p.hotel_since }}, she commissioned a clifftop residence overlooking the bay of Portofino,
+          furnished with pieces gathered across a lifetime of travel. What began as a private family home
+          became, over generations, the sanctuary it is today — a five-star hotel that still breathes with
+          the intimacy of a private residence.
+        </p>
+        <p style="font-size: var(--fs-sm); font-weight: 300; color: var(--text-body-light); line-height: 1.9;">
+          Today, the fourth generation of the Moretti family oversees Grand Azura alongside fifty dedicated
+          artisans of hospitality. Every stone has been restored, every room reimagined — yet the soul remains:
+          an unwavering commitment to genuine, unhurried care.
+        </p>
+        <div class="about-stats">
+          <div class="about-stat">
+            <div class="about-stat__number">{{ len $p.rooms }}</div>
+            <div class="about-stat__label">Rooms &amp; Suites</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat__number">{{ len $p.awards }}</div>
+            <div class="about-stat__label">International Awards</div>
+          </div>
+          <div class="about-stat">
+            <div class="about-stat__number">100+</div>
+            <div class="about-stat__label">Years of Heritage</div>
+          </div>
+        </div>
+        <a href="/about/" class="arrow-link" style="color: var(--gold-dark); margin-top: var(--sp-4);">Read Our Full Story</a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="{{ .Site.LanguageCode }}" itemscope itemtype="https://schema.org/WebPage">
+<head>
+  {{- partial "seo/head.html" . -}}
+  {{- partial "seo/schema.html" . -}}
+  <!-- Stripe preconnect (performance) -->
+  {{- if eq .Section "booking" }}
+  <link rel="preconnect" href="https://js.stripe.com">
+  <link rel="preconnect" href="https://api.stripe.com">
+  {{- end }}
+</head>
+<body class="{{ if .IsHome }}page--home{{ else }}page--inner{{ end }}{{ with .Type }} page--{{ . }}{{ end }}">
+
+  {{/* Skip to content link for accessibility */}}
+  <a class="sr-only" href="#main-content">Skip to main content</a>
+
+  {{- partial "header/nav.html" . -}}
+
+  <main id="main-content" role="main" tabindex="-1">
+    {{- block "main" . }}{{- end }}
+  </main>
+
+  {{- partial "footer/footer.html" . -}}
+
+  {{/* JavaScript (Hugo Pipes: minify + fingerprint) */}}
+  {{- $js := resources.Get "js/main.js" | minify | fingerprint "sha512" -}}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous" defer></script>
+
+</body>
+</html>

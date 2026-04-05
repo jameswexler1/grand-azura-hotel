@@ -1,0 +1,28 @@
+{{ define "main" }}
+<section class="page-hero">
+  <div class="page-hero__bg" style="background-image: url('/images/hero/hero-main.jpg');"></div>
+  <div class="page-hero__overlay"></div>
+  <div class="page-hero__content container">
+    <span class="eyebrow">{{ .Site.Params.hotel_name }}</span>
+    <h1 class="page-hero__title">{{ .Title }}</h1>
+  </div>
+</section>
+<section class="section">
+  <div class="container container--narrow">
+    {{ .Content }}
+    <div class="grid grid-2 stagger" style="margin-top: var(--sp-10);">
+      {{ range .Pages }}
+      <article class="room-card reveal">
+        <div class="room-card__body" style="padding: var(--sp-8);">
+          <h2 class="room-card__name">{{ .Title }}</h2>
+          <p class="room-card__desc">{{ .Summary }}</p>
+          <div class="room-card__footer">
+            <a href="{{ .Permalink }}" class="arrow-link">Read More</a>
+          </div>
+        </div>
+      </article>
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

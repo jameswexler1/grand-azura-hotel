@@ -1,0 +1,23 @@
+{{- $p := .Site.Params -}}
+<section class="cta-banner" aria-label="Make a reservation">
+  <div class="cta-banner__bg"
+       style="background-image: url('{{ $p.img_cta_bg }}');"
+       role="img" aria-label="Sunset view from the Grand Azura terrace"></div>
+  <div class="cta-banner__overlay" aria-hidden="true"></div>
+  <div class="cta-banner__content">
+    <span class="eyebrow reveal">Begin Your Journey</span>
+    <h2 class="cta-banner__title reveal" style="transition-delay: 80ms;">An Extraordinary Stay<br>Awaits You</h2>
+    <div class="gold-rule gold-rule--center reveal" style="transition-delay: 160ms;"></div>
+    <p class="lead reveal" style="color: var(--cream); transition-delay: 200ms; font-size: var(--fs-base);">
+      Reserve directly for the best available rate, complimentary upgrades, and exclusive benefits.
+    </p>
+    <div class="btn-group reveal" style="justify-content: center; transition-delay: 280ms;">
+      <a href="/booking/" class="btn btn--primary btn--lg">Check Availability</a>
+      <a href="/contact/" class="btn btn--ghost btn--lg">Contact Us</a>
+    </div>
+    <div class="reveal" style="transition-delay: 360ms; margin-top: var(--sp-6);">
+      <p style="font-size: var(--fs-xs); letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-subdued);">Or call our reservations team:</p>
+      <a href="tel:{{ $p.phone_main }}" class="cta-banner__phone" style="display: block; margin-top: var(--sp-2);">{{ $p.phone_main }}</a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,54 @@
+{{- $p := .Site.Params -}}
+<section class="section section--void" aria-labelledby="dining-heading">
+  <div class="container">
+    <header class="section-header section-header--center" style="margin-bottom: var(--sp-12);">
+      <span class="eyebrow reveal">Culinary Experiences</span>
+      <h2 id="dining-heading" class="reveal" style="transition-delay: 80ms;">A Table Like No Other</h2>
+      <div class="gold-rule gold-rule--center reveal" style="transition-delay: 160ms;"></div>
+      <p class="lead reveal" style="transition-delay: 200ms; max-width: 54ch;">
+        From a Michelin-starred dining room to sunset cocktails on the terrace — every meal at Grand Azura is a destination in itself.
+      </p>
+    </header>
+  </div>
+  <div class="dining-grid reveal">
+    <!-- Main restaurant -->
+    <div class="dining-panel">
+      <div class="dining-panel__bg" style="background-image: url('{{ $p.img_dining_rest }}');"></div>
+      <div class="dining-panel__overlay"></div>
+      <div class="dining-panel__content">
+        <span class="eyebrow eyebrow--no-lines" style="font-size: 0.65rem;">Michelin-Starred · Tasting Menu</span>
+        <h3 class="dining-panel__name">{{ $p.dining.restaurant_name }}</h3>
+        <p class="dining-panel__desc">{{ $p.dining.restaurant_desc | truncate 160 }}</p>
+        <div class="btn-group">
+          <a href="/dining/" class="btn btn--secondary">View Menu</a>
+          <a href="/contact/#dining-reservation" class="btn btn--ghost">Reserve a Table</a>
+        </div>
+      </div>
+    </div>
+    <!-- Two sub panels -->
+    <div style="display: grid; grid-template-rows: 1fr 1fr; gap: 1px;">
+      <div style="position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: var(--sp-8);">
+        <div style="position: absolute; inset: 0; background-image: url('{{ $p.img_dining_bar }}'); background-size: cover; background-position: center;"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,7,13,0.88) 0%, transparent 60%);"></div>
+        <div style="position: relative; z-index: 1;">
+          <span class="eyebrow eyebrow--no-lines" style="font-size: 0.6rem;">Signature Cocktails · {{ $p.bar_hours }}</span>
+          <h3 class="dining-panel__name" style="font-size: var(--fs-xl);">{{ $p.dining.bar_name }}</h3>
+          <a href="/dining/#bar" class="arrow-link" style="margin-top: var(--sp-3);">Explore the Bar</a>
+        </div>
+      </div>
+      <div style="position: relative; overflow: hidden; display: flex; align-items: flex-end; padding: var(--sp-8);">
+        <div style="position: absolute; inset: 0; background-image: url('{{ $p.img_dining_terrace }}'); background-size: cover; background-position: center;"></div>
+        <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(5,7,13,0.88) 0%, transparent 60%);"></div>
+        <div style="position: relative; z-index: 1;">
+          <span class="eyebrow eyebrow--no-lines" style="font-size: 0.6rem;">Al Fresco · Sea Views</span>
+          <h3 class="dining-panel__name" style="font-size: var(--fs-xl);">{{ $p.dining.terrace_name }}</h3>
+          <a href="/dining/#terrace" class="arrow-link" style="margin-top: var(--sp-3);">View La Terrazza</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align: center; margin-top: var(--sp-12);" class="reveal">
+    <p style="font-family: 'Cormorant Garamond', serif; font-size: var(--fs-lg); font-style: italic; color: var(--text-subdued); margin-bottom: var(--sp-5);">Reservations recommended · Dress code: Smart Casual</p>
+    <p style="font-size: var(--fs-sm); color: var(--text-muted);">Dining reservations: <a href="tel:{{ $p.phone_dining }}" style="color: var(--gold-light);">{{ $p.phone_dining }}</a></p>
+  </div>
+</section>

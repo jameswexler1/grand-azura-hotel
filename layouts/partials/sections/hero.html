@@ -1,0 +1,25 @@
+{{- $p := .Site.Params -}}
+<section class="hero" aria-label="Welcome to {{ $p.hotel_full_name }}">
+  <div class="hero__bg"
+       style="background-image: url('{{ $p.img_hero_main }}');"
+       role="img"
+       aria-label="Aerial view of Grand Azura Hotel overlooking the Ligurian coastline"></div>
+  <div class="hero__overlay" aria-hidden="true"></div>
+  <div class="hero__badge" aria-hidden="true">
+    <div class="hero__badge-stars">★★★★★</div>
+    <div class="hero__badge-text">Five<br>Star<br>Luxury</div>
+  </div>
+  <div class="hero__content">
+    <span class="eyebrow hero__eyebrow">{{ $p.address_city }}, {{ $p.address_country }} · Est. {{ $p.hotel_since }}</span>
+    <h1 class="hero__title">Where the Sea<br><em>Becomes Home</em></h1>
+    <p class="hero__desc">{{ $p.hotel_short_desc }}</p>
+    <div class="hero__cta btn-group">
+      <a href="/booking/" class="btn btn--primary btn--lg">Reserve Your Stay</a>
+      <a href="/rooms/" class="btn btn--ghost btn--lg">Explore Rooms</a>
+    </div>
+  </div>
+  <div class="hero__scroll" aria-hidden="true">
+    <div class="hero__scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>

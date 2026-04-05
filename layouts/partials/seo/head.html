@@ -1,0 +1,85 @@
+{{- $title      := cond .IsHome .Site.Params.hotel_full_name (printf "%s | %s" .Title .Site.Params.hotel_full_name) -}}
+{{- $desc       := cond .IsHome .Site.Params.hotel_description (.Params.description | default .Site.Params.hotel_short_desc) -}}
+{{- $ogImage    := .Params.og_image | default .Site.Params.og_image -}}
+{{- $canonical  := .Permalink -}}
+
+<!-- ══ Primary Meta ══════════════════════════════════════════════════════ -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>{{ $title }}</title>
+<meta name="description" content="{{ $desc }}">
+<meta name="keywords" content="luxury hotel, boutique hotel, Portofino, Liguria Italy, five star hotel, spa, fine dining, sea view rooms, Grand Azura">
+<meta name="author" content="{{ .Site.Params.hotel_full_name }}">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="{{ $canonical }}">
+
+<!-- ══ Open Graph (Facebook, LinkedIn, WhatsApp) ══════════════════════════ -->
+<meta property="og:type"        content="{{ cond .IsHome "website" "article" }}">
+<meta property="og:url"         content="{{ $canonical }}">
+<meta property="og:title"       content="{{ $title }}">
+<meta property="og:description" content="{{ $desc }}">
+<meta property="og:image"       content="{{ $ogImage | absURL }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt"   content="{{ .Site.Params.hotel_full_name }}">
+<meta property="og:site_name"   content="{{ .Site.Params.hotel_full_name }}">
+<meta property="og:locale"      content="en_US">
+
+<!-- ══ Twitter Card ═══════════════════════════════════════════════════════ -->
+<meta name="twitter:card"        content="{{ .Site.Params.twitter_card_type }}">
+<meta name="twitter:site"        content="{{ .Site.Params.twitter_handle }}">
+<meta name="twitter:creator"     content="{{ .Site.Params.twitter_handle }}">
+<meta name="twitter:title"       content="{{ $title }}">
+<meta name="twitter:description" content="{{ $desc }}">
+<meta name="twitter:image"       content="{{ $ogImage | absURL }}">
+
+<!-- ══ Geo & Contact ══════════════════════════════════════════════════════ -->
+<meta name="geo.region"       content="IT-LIG">
+<meta name="geo.placename"    content="{{ .Site.Params.address_city }}, {{ .Site.Params.address_country }}">
+<meta name="geo.position"     content="{{ .Site.Params.map_lat }};{{ .Site.Params.map_lng }}">
+<meta name="ICBM"             content="{{ .Site.Params.map_lat }}, {{ .Site.Params.map_lng }}">
+
+<!-- ══ Theme & PWA ════════════════════════════════════════════════════════ -->
+<meta name="theme-color"          content="#0a0d16">
+<meta name="msapplication-TileColor" content="#0a0d16">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="{{ .Site.Params.hotel_name }}">
+
+<!-- ══ Favicons ═══════════════════════════════════════════════════════════ -->
+<link rel="icon" type="image/svg+xml"   href="/favicon/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+<link rel="manifest" href="/favicon/site.webmanifest">
+
+<!-- ══ RSS ════════════════════════════════════════════════════════════════ -->
+{{ range .AlternativeOutputFormats -}}
+  <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Site.Params.hotel_full_name }}">
+{{- end }}
+
+<!-- ══ Google Fonts (no npm needed — CDN only) ═══════════════════════════ -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- ══ CSS (Hugo Pipes: minify + fingerprint) ════════════════════════════ -->
+{{ $css := resources.Get "css/main.css" | minify | fingerprint "sha512" -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}" crossorigin="anonymous">
+
+<!-- ══ Preload hero image ══════════════════════════════════════════════ -->
+{{ if .IsHome }}
+<link rel="preload" as="image" href="/images/hero/hero-main.jpg" fetchpriority="high">
+{{ end }}
+
+<!-- ══ Google Analytics (only if GA ID set) ══════════════════════════════ -->
+{{ with .Site.Params.google_analytics }}
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ . }}', { anonymize_ip: true });
+</script>
+{{ end }}

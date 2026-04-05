@@ -9,7 +9,6 @@
 baseURL       = "https://www.grandazura.com/"
 languageCode  = "en-us"
 title         = "Grand Azura Hotel & Spa"
-theme         = ""          # Using custom layouts; no theme directory needed
 paginate      = 9
 enableRobotsTXT = true
 enableGitInfo   = false
@@ -127,7 +126,7 @@ copyright       = "© 2025 Grand Azura Hotel & Spa. All rights reserved."
   booking_url       = "https://booking.grandazura.com"
   booking_phone     = "+39 0185 269 100"
 
-  
+
   # ── Hero & Section Background Images (Unsplash CDN) ──────────────────────
   img_hero_main      = "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1920&q=82"
   img_about_main     = "https://images.unsplash.com/photo-1582719508461-905c673771fd?auto=format&fit=crop&w=1200&q=82"
@@ -694,4 +693,3 @@ copyright       = "© 2025 Grand Azura Hotel & Spa. All rights reserved."
     name   = "Loyalty Programme"
     url    = "/loyalty/"
     weight = 4
-
